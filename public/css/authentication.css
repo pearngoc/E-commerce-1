@@ -1,0 +1,67 @@
+.divider:after,
+.divider:before {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #eee;
+}
+
+.mt-100{
+  margin-top: 100px;
+}
+
+.icon{
+  margin-right: 15px;
+}
+
+.text-customer{
+  font-size: 20px;
+}
+
+.flex-center{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.header-text{
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.forgot-pw{
+  display: block;
+  margin-left: 350px;
+  margin-bottom: 10px;
+}
+
+
+
+.icon-sign_up{
+  margin-right: 5px;
+}
+
+.form-control{
+  width: 400px;
+}
+
+.check-label{
+  margin-bottom: 20px;
+  margin-top: 23px;
+}
+
+.checkbox-signup{
+  margin-right: 10px;
+  margin-top: 4px
+}
+
+.sign-up-term{
+  justify-content: center;
+}
+
+.set--width__input{
+  width: 100%;
+}
