@@ -6,7 +6,7 @@ const productSchema = new Schema({
     title:{
         type: String,
         require: true,
-        unique: true,
+        //unique: true,
     },
 
     image:{
@@ -26,7 +26,7 @@ const productSchema = new Schema({
     },
 
     summary:{
-        type: Text,
+        type: String,
         default: "",
     },
 
@@ -66,16 +66,9 @@ const productSchema = new Schema({
         default: 0,
     },
 
-    createAt:{
-        type: Date,
-        default: Date.now()
-    },
-
-    updateAt:{
-        type: Date,
-        default: Date.now(),
-    }
+   
     
-})
+},{timestamps: true})
 
-module.exports = mongoose.model("product", productSchema)
+const Product = mongoose.model("Product", productSchema)
+module.exports = Product

@@ -5,10 +5,7 @@ const userSchema = new Schema({
     email: {
         type: String,
         required: true,
-        unique: true,
-        validate: (value) =>{
-            return validator.isEmail(value)
-        }
+        //unique: true
     },
     password: {
         type: String,
@@ -30,18 +27,9 @@ const userSchema = new Schema({
         type: String,
         default: "",
     },
-    
-    createAt:{
-        type: Date,
-        default: Date.now()
-    },
-
-    updateAt:{
-        type: Date,
-        default: Date.now(),
-    }
 
 
-})
+
+},{timestamps: true})
 
 module.exports = mongoose.model("User", userSchema)
