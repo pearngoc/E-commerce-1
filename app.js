@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const db = require('./config/db')
 
 const indexRouter = require('./routes/index');
 const aboutRouter = require('./routes/about');
@@ -15,6 +16,10 @@ const signUpRouter = require('./routes/authentication/signup');
 const productDetailRouter = require('./routes/product/productDetail')
 
 // const usersRouter = require('./routes/users');
+
+
+// connect to DB
+db.connect()
 
 const app = express();
 
@@ -31,7 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/contact', contactRouter);
 app.use('/about', aboutRouter);
-app.use('/product', productRouter);
+app.use('/products', productRouter);
 app.use('/blog', blogRouter);
 app.use('/cart', cartRouter);
 app.use('/signin', signInRouter)
