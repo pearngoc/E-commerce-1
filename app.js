@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+
 const db = require('./config/db')
 
 const indexRouter = require('./routes/index');
@@ -10,7 +11,7 @@ const aboutRouter = require('./routes/about');
 const contactRouter = require('./routes/contact');
 const blogRouter = require('./routes/blog/blog');
 const cartRouter = require('./routes/cart/cart');
-const productRouter = require('./routes/product/product');
+const productRouter = require('./routes/product/products');
 const signInRouter = require('./routes/authentication/signin');
 const signUpRouter = require('./routes/authentication/signup');
 const productDetailRouter = require('./routes/product/productDetail')
@@ -26,6 +27,7 @@ const app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+
 
 app.use(logger('dev'));
 app.use(express.json());
