@@ -14,7 +14,6 @@ const cartRouter = require('./routes/cart/cart');
 const productRouter = require('./routes/product/products');
 const signInRouter = require('./routes/authentication/signin');
 const signUpRouter = require('./routes/authentication/signup');
-const productDetailRouter = require('./routes/product/productDetail')
 
 // const usersRouter = require('./routes/users');
 
@@ -39,11 +38,12 @@ app.use('/', indexRouter);
 app.use('/contact', contactRouter);
 app.use('/about', aboutRouter);
 app.use('/products', productRouter);
+// app.use('/products/:id', productDetailRouter);
 app.use('/blog', blogRouter);
 app.use('/cart', cartRouter);
 app.use('/signin', signInRouter)
 app.use('/signup', signUpRouter)
-app.use('/productDetail', productDetailRouter)
+// app.use('/productDetail', productDetailRouter)
 
 // app.use('/users', usersRouter);
 
