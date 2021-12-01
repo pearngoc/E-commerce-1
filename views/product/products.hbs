@@ -329,14 +329,14 @@
             </div>
         </div>
 
-        <div class="row isotope-grid">
-            {{#each products}}
+        <div class = "content"  > 
+            {{!-- {{#each products}}
                 <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item {{#each this.category}}{{this}} {{/each}}">
                     <!-- Block2 -->
                     <div class="block2">
                         <div class="block2-pic hov-img0">
                             <a href="/products/{{this._id}}">
-                                <img src="/{{this.thumbnail}}" alt="IMG-PRODUCT">
+                                <img src="{{this.thumbnail}}" alt="IMG-PRODUCT">
                             </a>
                             <a href="/products/{{this._id}}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
                                 Quick View
@@ -366,11 +366,11 @@
                     </div>
                      
                 </div>
-             {{/each}}
+             {{/each}} --}}
+            
         </div>
        
-
-            {{!-- <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item men women">
+             {{!-- <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item men women">
                 <!-- Block2 -->
                 <div class="block2">
                     <div class="block2-pic hov-img0">
@@ -401,6 +401,7 @@
                     </div>
                 </div>
             </div> --}}
+            
             
 
             {{!-- <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item ">
@@ -858,6 +859,29 @@
                 Load More
             </a>
         </div> --}}
-       
+        {{!-- <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                <form method = 'GET'>
+                    <li class="page-item"><a class="page-link" href="#" onclick="loadPage(1)">1</a></li>
+                </form>
+                <li class="page-item"><a class="page-link" href="#" onclick="loadPage(2)">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+            </ul>
+        </nav> --}}
+        <div id = 'paging'>
+            
+        </div>
     </div>
 </div>
