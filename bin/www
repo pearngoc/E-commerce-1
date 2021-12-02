@@ -4,14 +4,14 @@
  * Module dependencies.
  */
 
-const db = require('../database/process/process')
+// const db = require('../database/process/process')
 const http = require('http');
 async function main(){
   try {
         const app = require('../app');
         const debug = require('debug')('web:server');
        
-        db()
+        // db()
         /**
          * Get port from environment and store in Express.
          */
@@ -37,12 +37,12 @@ async function main(){
 
 }
 main().catch(console.error);
-async function listDatabases(client){
-    databasesList = await client.db().admin().listDatabases();
+// async function listDatabases(client){
+//     databasesList = await client.db().admin().listDatabases();
 
-    console.log("Databases:");
-    databasesList.databases.forEach(db => console.log(` - ${db.name}`));
-};
+//     console.log("Databases:");
+//     databasesList.databases.forEach(db => console.log(` - ${db.name}`));
+// };
 
 
 

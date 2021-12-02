@@ -46,16 +46,6 @@ const productSchema = new Schema({
         require: true,
     },
 
-    // additionalInformation:{
-    //     type: Text,
-    //     default: "",
-    // },
-
-    // review:{
-    //     type: Array,
-    //     default: [],
-    // },
-
     category:{
         type: Array,
         default: [],

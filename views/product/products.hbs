@@ -17,7 +17,7 @@
             <ul class="header-cart-wrapitem w-full">
                 <li class="header-cart-item flex-w flex-t m-b-12">
                     <div class="header-cart-item-img">
-                        <img src="images/item-cart-01.jpg" alt="IMG">
+                        <img src="/images/item-cart-01.jpg" alt="IMG">
                     </div>
 
                     <div class="header-cart-item-txt p-t-8">
@@ -33,7 +33,7 @@
 
                 <li class="header-cart-item flex-w flex-t m-b-12">
                     <div class="header-cart-item-img">
-                        <img src="images/item-cart-02.jpg" alt="IMG">
+                        <img src="/images/item-cart-02.jpg" alt="IMG">
                     </div>
 
                     <div class="header-cart-item-txt p-t-8">
@@ -49,7 +49,7 @@
 
                 <li class="header-cart-item flex-w flex-t m-b-12">
                     <div class="header-cart-item-img">
-                        <img src="images/item-cart-03.jpg" alt="IMG">
+                        <img src="/images/item-cart-03.jpg" alt="IMG">
                     </div>
 
                     <div class="header-cart-item-txt p-t-8">
@@ -329,40 +329,48 @@
             </div>
         </div>
 
-        <div class="row isotope-grid">
-            <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
-                <!-- Block2 -->
-                <div class="block2">
-                    <div class="block2-pic hov-img0">
-                        <img src="images/product-01.jpg" alt="IMG-PRODUCT">
-
-                        <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                            Quick View
-                        </a>
-                    </div>
-
-                    <div class="block2-txt flex-w flex-t p-t-14">
-                        <div class="block2-txt-child1 flex-col-l ">
-                            <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                Esprit Ruffle Shirt
+        <div class = "content"  > 
+            {{!-- {{#each products}}
+                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item {{#each this.category}}{{this}} {{/each}}">
+                    <!-- Block2 -->
+                    <div class="block2">
+                        <div class="block2-pic hov-img0">
+                            <a href="/products/{{this._id}}">
+                                <img src="{{this.thumbnail}}" alt="IMG-PRODUCT">
                             </a>
-
-                            <span class="stext-105 cl3">
-                                $16.64
-                            </span>
-                        </div>
-
-                        <div class="block2-txt-child2 flex-r p-t-3">
-                            <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                <img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON">
-                                <img class="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON">
+                            <a href="/products/{{this._id}}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+                                Quick View
                             </a>
                         </div>
+
+                        <div class="block2-txt flex-w flex-t p-t-14">
+                            <div class="block2-txt-child1 flex-col-l ">
+                                <a href="/products/{{this._id}}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+                                    {{this.title}}
+                                </a>
+
+                                <span class="stext-105 cl3">
+                                    ${{this.price}}
+                                </span>
+                            </div>
+
+                            <div class="block2-txt-child2 flex-r p-t-3">
+                                <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+                                    <img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON">
+                                    <img class="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON">
+                                </a>
+                            </div>
+                          
+                        </div>
+                        
                     </div>
+                     
                 </div>
-            </div>
-
-            <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+             {{/each}} --}}
+            
+        </div>
+       
+             {{!-- <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item men women">
                 <!-- Block2 -->
                 <div class="block2">
                     <div class="block2-pic hov-img0">
@@ -392,9 +400,11 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
+            
+            
 
-            <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item men">
+            {{!-- <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item ">
                 <!-- Block2 -->
                 <div class="block2">
                     <div class="block2-pic hov-img0">
@@ -424,9 +434,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
-            <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+            {{!-- <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
                 <!-- Block2 -->
                 <div class="block2">
                     <div class="block2-pic hov-img0">
@@ -456,9 +466,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
-            <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+            {{!-- <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
                 <!-- Block2 -->
                 <div class="block2">
                     <div class="block2-pic hov-img0">
@@ -488,8 +498,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
+            </div> --}}
+{{!-- 
             <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item watches">
                 <!-- Block2 -->
                 <div class="block2">
@@ -520,8 +530,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
+            </div> --}}
+{{!-- 
             <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
                 <!-- Block2 -->
                 <div class="block2">
@@ -552,9 +562,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
-            <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+            {{!-- <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
                 <!-- Block2 -->
                 <div class="block2">
                     <div class="block2-pic hov-img0">
@@ -584,8 +594,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
+            </div> --}}
+{{!-- 
             <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item shoes">
                 <!-- Block2 -->
                 <div class="block2">
@@ -616,8 +626,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
+            </div> --}}
+{{!-- 
             <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
                 <!-- Block2 -->
                 <div class="block2">
@@ -648,8 +658,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
+            </div> --}}
+{{!-- 
             <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item men">
                 <!-- Block2 -->
                 <div class="block2">
@@ -680,9 +690,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
-            <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item men">
+            {{!-- <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item men">
                 <!-- Block2 -->
                 <div class="block2">
                     <div class="block2-pic hov-img0">
@@ -712,9 +722,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
-            <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+            {{!-- <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
                 <!-- Block2 -->
                 <div class="block2">
                     <div class="block2-pic hov-img0">
@@ -744,9 +754,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
-            <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+            {{!-- <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
                 <!-- Block2 -->
                 <div class="block2">
                     <div class="block2-pic hov-img0">
@@ -776,9 +786,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
-            <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item watches">
+            {{!-- <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item watches">
                 <!-- Block2 -->
                 <div class="block2">
                     <div class="block2-pic hov-img0">
@@ -808,9 +818,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
-            <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+            {{!-- <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
                 <!-- Block2 -->
                 <div class="block2">
                     <div class="block2-pic hov-img0">
@@ -841,13 +851,37 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
-        <!-- Load more -->
+        {{!-- <!-- Load more -->
         <div class="flex-c-m flex-w w-full p-t-45">
             <a href="#" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
                 Load More
             </a>
+        </div> --}}
+        {{!-- <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                <form method = 'GET'>
+                    <li class="page-item"><a class="page-link" href="#" onclick="loadPage(1)">1</a></li>
+                </form>
+                <li class="page-item"><a class="page-link" href="#" onclick="loadPage(2)">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+            </ul>
+        </nav> --}}
+        <div id = 'paging'>
+            
         </div>
     </div>
 </div>
