@@ -1,4 +1,4 @@
-const Product = require('../../models/product')
+const Product = require('./productModel')
 
 class Course{
     show(skip, page_size) {

@@ -28,11 +28,11 @@ class CourseController{
 
     async showDetail(req, res){
         const product = await productService.showProductDetail(req.params.id)
-        res.render('product/productDetail', { product: mongooseToObject(product) })
+        res.render('products/views/productDetail', { product: mongooseToObject(product) })
     }
 
     renderFile(req, res){
-        res.render('product/products',{})
+        res.render('products/views/products',{})
     }
 
     

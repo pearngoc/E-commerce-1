@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const productController = require('../../component/products/productController')
+const productController = require('./productController')
 
 /* GET home page. */
 router.get('/', productController.renderFile);
