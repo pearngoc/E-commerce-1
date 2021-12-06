@@ -11,7 +11,7 @@ const aboutRouter = require('./routes/about');
 const contactRouter = require('./routes/contact');
 const blogRouter = require('./routes/blog/blog');
 const cartRouter = require('./routes/cart/cart');
-const productRouter = require('./routes/product/products');
+const productRouter = require('./component/products/index');
 const signInRouter = require('./routes/authentication/signin');
 const signUpRouter = require('./routes/authentication/signup');
 
@@ -24,7 +24,7 @@ db.connect()
 const app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', [path.join(__dirname, 'views'),path.join(__dirname, 'component')]);
 app.set('view engine', 'hbs');
 
 
