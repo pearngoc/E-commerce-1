@@ -3334,3 +3334,7 @@ input.num-product::-webkit-inner-spin-button {
 .mt-84 {
   margin-top: 84px;
 }
+
+.wrong{
+  color: red;
+}
