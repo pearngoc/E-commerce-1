@@ -3,8 +3,9 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-
+const session = require('express-session')
 const db = require('./config/db')
+const passport = require('./passport')
 
 const indexRouter = require('./routes/index');
 const aboutRouter = require('./routes/about');
@@ -12,11 +13,10 @@ const contactRouter = require('./routes/contact');
 const blogRouter = require('./routes/blog/blog');
 const cartRouter = require('./routes/cart/cart');
 const productRouter = require('./component/products/index');
-const signInRouter = require('./routes/authentication/signin');
-const signUpRouter = require('./routes/authentication/signup');
-
+//const signInRouter = require('./routes/authentication/signin');
+//const signUpRouter = require('./routes/authentication/signup');
+const authRouter = require('./component/authentication')
 // const usersRouter = require('./routes/users');
-
 
 // connect to DB
 db.connect()
@@ -34,15 +34,21 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({ secret: process.env.SESSION_SECRET }));
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use('/', indexRouter);
+app.use('/', authRouter);
 app.use('/contact', contactRouter);
 app.use('/about', aboutRouter);
 app.use('/products', productRouter);
 // app.use('/products/:id', productDetailRouter);
 app.use('/blog', blogRouter);
 app.use('/cart', cartRouter);
-app.use('/signin', signInRouter)
-app.use('/signup', signUpRouter)
+//app.use('/signin', signInRouter)
+
+//app.use('/signup', signUpRouter)
 // app.use('/productDetail', productDetailRouter)
 
 // app.use('/users', usersRouter);
