@@ -1,12 +1,10 @@
 var express = require('express');
 var router = express.Router();
-
+var userModel = require('../component/authentication/userModel')
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { user: req.user });
+  res.render('index');
 });
 
-router.get('/account', function(req, res, next){
-  res.render('profile')
-})
+
 module.exports = router;

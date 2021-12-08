@@ -3338,3 +3338,12 @@ input.num-product::-webkit-inner-spin-button {
 .wrong{
   color: red;
 }
+
+.custom-wishlist{
+  margin-right: 10px;
+}
+
+.dropdown-item:hover{
+  background-color:#474747;
+  color: white
+}

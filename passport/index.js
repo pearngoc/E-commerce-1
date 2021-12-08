@@ -9,7 +9,8 @@ passport.use(new LocalStrategy(
     if(!user){
         return done(null, false, {message: 'Incorrect username'})
     }
-    if(!userService.validPassword(password, user)){
+    const isValid = await userService.validPassword(password, user)
+    if(!isValid){
         return done(null, false, {message: 'Incorrect password'})
     }
     return done(null, user);
@@ -17,13 +18,11 @@ passport.use(new LocalStrategy(
 ));
 
 passport.serializeUser(function(user, done) {
-    done(null, user.username);
-  });
+    done(null, {id:user._id, username: user.username, email: user.email,phone: user.phoneNumber, address:user.address});
+});
   
-  passport.deserializeUser(async function(username, done) {
-    const user = await userService.findByUserName(username)
-    done(null, user);
-    
-  });
+passport.deserializeUser(async function(user, done) {
+  done(null, user);
+});
 
 module.exports = passport;
