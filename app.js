@@ -3,28 +3,29 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-
+const session = require('express-session')
 const db = require('./config/db')
+const passport = require('./passport')
+const methodOverride = require('method-override')
 
 const indexRouter = require('./routes/index');
 const aboutRouter = require('./routes/about');
 const contactRouter = require('./routes/contact');
 const blogRouter = require('./routes/blog/blog');
 const cartRouter = require('./routes/cart/cart');
-const productRouter = require('./routes/product/products');
-const signInRouter = require('./routes/authentication/signin');
-const signUpRouter = require('./routes/authentication/signup');
-
-// const usersRouter = require('./routes/users');
+const productRouter = require('./component/products/index');
+const authRouter = require('./component/authentication')
+const loggedInUserGuard = require('./middleware/loggerInUserGuard')
+const profileUserRouter = require('./routes/profile')
 
 
 // connect to DB
 db.connect()
 
 const app = express();
-
+app.use(methodOverride('_method'))
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', [path.join(__dirname, 'views'),path.join(__dirname, 'component')]);
 app.set('view engine', 'hbs');
 
 
@@ -34,18 +35,25 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({ secret: process.env.SESSION_SECRET }));
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(function(req, res, next){
+  res.locals.user = req.user;
+  next();
+})
+
+
+
 app.use('/', indexRouter);
+app.use('/', authRouter);
 app.use('/contact', contactRouter);
 app.use('/about', aboutRouter);
 app.use('/products', productRouter);
-// app.use('/products/:id', productDetailRouter);
+app.use('/me', loggedInUserGuard, profileUserRouter)
 app.use('/blog', blogRouter);
 app.use('/cart', cartRouter);
-app.use('/signin', signInRouter)
-app.use('/signup', signUpRouter)
-// app.use('/productDetail', productDetailRouter)
-
-// app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

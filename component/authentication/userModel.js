@@ -28,6 +28,18 @@ const userSchema = new Schema({
         default: "",
     },
 
+    phoneNumber:{
+        type: String,
+        default: "",
+        min: 10,
+        max: 12
+    },
+
+    address:{
+        type: String,
+        default: ""
+    }
+
 
 
 },{timestamps: true})
