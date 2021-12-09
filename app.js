@@ -14,12 +14,10 @@ const contactRouter = require('./routes/contact');
 const blogRouter = require('./routes/blog/blog');
 const cartRouter = require('./routes/cart/cart');
 const productRouter = require('./component/products/index');
-//const signInRouter = require('./routes/authentication/signin');
-//const signUpRouter = require('./routes/authentication/signup');
 const authRouter = require('./component/authentication')
 const loggedInUserGuard = require('./middleware/loggerInUserGuard')
 const profileUserRouter = require('./routes/profile')
-// const usersRouter = require('./routes/users');
+
 
 // connect to DB
 db.connect()
@@ -54,15 +52,8 @@ app.use('/contact', contactRouter);
 app.use('/about', aboutRouter);
 app.use('/products', productRouter);
 app.use('/me', loggedInUserGuard, profileUserRouter)
-// app.use('/products/:id', productDetailRouter);
 app.use('/blog', blogRouter);
 app.use('/cart', cartRouter);
-//app.use('/signin', signInRouter)
-
-//app.use('/signup', signUpRouter)
-// app.use('/productDetail', productDetailRouter)
-
-// app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

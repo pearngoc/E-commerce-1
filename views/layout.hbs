@@ -58,12 +58,12 @@
 								Sign out
 							</a>
 						{{else}}
-							<a href="/signup" class="flex-c-m trans-04 p-lr-25">
-								Sign up
+							<a href="/register" class="flex-c-m trans-04 p-lr-25">
+								Register
 							</a>
 
 							<a href="/login" class="flex-c-m trans-04 p-lr-25">
-								Sign in
+								 Login
 							</a>
 						{{/if}}
 
@@ -135,12 +135,7 @@
 						{{#if user}}
 						<div class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								{{#if userNew}}
-									Hello, {{userNew.username}}
-								{{else}}
 									Hello, {{user.username}}
-								{{/if}}
-
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 								<a class="dropdown-item" href="/me">My Profile</a>

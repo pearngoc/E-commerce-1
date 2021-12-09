@@ -21,12 +21,7 @@
                 </div>
                 <form method="POST" action="/me/{{user.id}}?_method=PUT" >
                 <div class="row mt-2">
-                    {{#if userNew}}
-                    <div class="col-md-6 mt-3"><strong>Username</strong><input type="text" class="form-control" placeholder="username name" value="{{userNew.username}}" name="username" id="username"></div>
-                    <div class="col-md-12 mt-3"><strong>Email</strong><input type="text" class="form-control" placeholder="email" value="{{userNew.email}}" name="email"></div>
-                    <div class="col-md-12 mt-3"><strong>Phone number</strong><input type="text" class="form-control" placeholder="phone number" value="{{userNew.phoneNumber}}" name="phoneNumber"></div>
-                    <div class="col-md-12 mt-3"><strong>Address</strong><input type="text" class="form-control" placeholder="address" value="{{userNew.address}}" name="address"></div>
-                    {{else}}
+                    {{#if user}}
                     <div class="col-md-6 mt-3"><strong>Username</strong><input type="text" class="form-control" placeholder="username name" value="{{user.username}}" name="username" id="username"></div>
                     <div class="col-md-12 mt-3"><strong>Email</strong><input type="text" class="form-control" placeholder="email" value="{{user.email}}" name="email"></div>
                     <div class="col-md-12 mt-3"><strong>Phone number</strong><input type="text" class="form-control" placeholder="phone number" value="{{user.phone}}" name="phoneNumber"></div>
