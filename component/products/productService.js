@@ -1,5 +1,6 @@
 const Product = require('./productModel')
 
+
 class Course{
     show(skip, page_size) {
         return Product.find({})
@@ -18,6 +19,8 @@ class Course{
     countDocuments(){
         return Product.countDocuments({})
     }
+
+    
 }
 
 module.exports = new Course();

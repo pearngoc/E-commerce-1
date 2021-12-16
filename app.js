@@ -12,7 +12,7 @@ const indexRouter = require('./routes/index');
 const aboutRouter = require('./routes/about');
 const contactRouter = require('./routes/contact');
 const blogRouter = require('./routes/blog/blog');
-const cartRouter = require('./routes/cart/cart');
+const cartRouter = require('./component/cart');
 const productRouter = require('./component/products/index');
 const authRouter = require('./component/authentication')
 const loggedInUserGuard = require('./middleware/loggerInUserGuard')
@@ -41,6 +41,7 @@ app.use(passport.session());
 
 app.use(function(req, res, next){
   res.locals.user = req.user;
+  res.locals.session  = req.session;
   next();
 })
 
