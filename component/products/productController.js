@@ -1,7 +1,6 @@
 const productService = require('./productService')
 const { mutipleMongooseToObject } = require('../../util/mongoose')
 const { mongooseToObject } = require('../../util/mongoose')
-const Cart =  require('../../public/js/cart')
 const PAGE_SIZE = 8;
 class CourseController{
     async show(req, res){
@@ -35,30 +34,6 @@ class CourseController{
     renderFile(req, res){
         res.render('products/views/products',{})
     }
-
-    // async addToCart(req, res){
-    //     var productId = req.params.id;
-    //     var cart = new Cart(req.session.cart ? req.session.cart : {});
-
-    //     const product = await productService.findProduct(productId);
-    //     console.log(product);
-    //     cart.add(product, product.id);
-    //     req.session.cart = cart;
-    //     console.log(req.session.cart);
-    //     res.redirect('/products');
-    // }
-
-    // removeItem(req, res){
-    //     var productId = req.params.id;
-    //     var cart = new Cart(req.session.cart ? req.session.cart : {});
-
-    //     cart.reduceByOne(productId);
-    //     req.session.cart = cart;
-    //     res.redirect('/cart');
-    // }
-
-   
-
     
 }
 
