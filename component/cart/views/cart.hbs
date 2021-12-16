@@ -1,5 +1,6 @@
 <!-- Cart -->
-<div class="wrap-header-cart js-panel-cart">
+
+{{!-- <div class="wrap-header-cart js-panel-cart">
     <div class="s-full js-hide-cart"></div>
 
     <div class="header-cart flex-col-l p-l-65 p-r-25">
@@ -12,7 +13,7 @@
                 <i class="zmdi zmdi-close"></i>
             </div>
         </div>
-        
+       
         <div class="header-cart-content flex-w js-pscroll">
             <ul class="header-cart-wrapitem w-full">
                 <li class="header-cart-item flex-w flex-t m-b-12">
@@ -81,7 +82,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
 
 <!-- breadcrumb -->
@@ -99,7 +100,8 @@
 </div>
     
 
-<!-- Shoping Cart -->
+<!-- Shoping Cart --> 
+{{#if products}} 
 <form class="bg0 p-t-75 p-b-85">
     <div class="container">
         <div class="row">
@@ -114,32 +116,33 @@
                                 <th class="column-4">Quantity</th>
                                 <th class="column-5">Total</th>
                             </tr>
-
+                            {{#each products}}
                             <tr class="table_row">
                                 <td class="column-1">
                                     <div class="how-itemcart1">
-                                        <img src="images/item-cart-04.jpg" alt="IMG">
+                                        <img src="{{this.item.thumbnail}}" alt="IMG">
                                     </div>
                                 </td>
-                                <td class="column-2">Fresh Strawberries</td>
-                                <td class="column-3">$ 36.00</td>
+                                <td class="column-2">{{this.item.title}}</td>
+                                <td class="column-3">$ {{this.item.price}}</td>
                                 <td class="column-4">
                                     <div class="wrap-num-product flex-w m-l-auto m-r-0">
-                                        <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+                                        <a href="/cart/reduce/{{this.item._id}}" class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
                                             <i class="fs-16 zmdi zmdi-minus"></i>
-                                        </div>
+                                        </a>
 
-                                        <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product1" value="1">
+                                        <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product1" value="{{this.qty}}">
 
-                                        <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+                                        <a href = "/cart/insert/{{this.item._id}}" class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
                                             <i class="fs-16 zmdi zmdi-plus"></i>
-                                        </div>
+                                        </a>
                                     </div>
                                 </td>
-                                <td class="column-5">$ 36.00</td>
+                                <td class="column-5">$ {{this.price}}</td>
                             </tr>
+                            {{/each}}
 
-                            <tr class="table_row">
+                            {{!-- <tr class="table_row">
                                 <td class="column-1">
                                     <div class="how-itemcart1">
                                         <img src="images/item-cart-05.jpg" alt="IMG">
@@ -161,7 +164,7 @@
                                     </div>
                                 </td>
                                 <td class="column-5">$ 16.00</td>
-                            </tr>
+                            </tr> --}}
                         </table>
                     </div>
 
@@ -196,7 +199,7 @@
 
                         <div class="size-209">
                             <span class="mtext-110 cl2">
-                                $79.65
+                                ${{totalPrice}}
                             </span>
                         </div>
                     </div>
@@ -254,7 +257,7 @@
 
                         <div class="size-209 p-t-1">
                             <span class="mtext-110 cl2">
-                                $79.65
+                                ${{totalPrice}}
                             </span>
                         </div>
                     </div>
@@ -267,4 +270,20 @@
         </div>
     </div>
 </form>
+{{else}}
+
+<form class="bg0 p-t-75 p-b-85">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
+                <div class="m-l-25 m-r--38 m-lr-0-xl d-flex justify-content-center">
+                    <strong>NO PRODUCT IN CART!!!</strong>
+                </div>
+             </div>
+         </div>
+    </div>
+</form>
+
+{{/if}}
+
 		

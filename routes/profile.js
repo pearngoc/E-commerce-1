@@ -6,7 +6,11 @@ router.put('/:id', function(req, res, next){
   //res.json(req.body);
   userModel.updateOne({_id: req.params.id}, req.body)
           .then(()=> {
-            res.locals.userNew = {id: req.params.id, ...req.body}
+            req.session.passport.user.username = req.body.username;
+            req.session.passport.user.email = req.body.email;
+            req.session.passport.user.phone = req.body.phoneNumber;
+            req.session.passport.user.address = req.body.address;
+            console.log(req.body);
             res.redirect('/me')            
           })
           .catch(next);

@@ -38,10 +38,31 @@ const userSchema = new Schema({
     address:{
         type: String,
         default: ""
-    }
+    },
+    
+    lock_status:{
+        type: Boolean,
+        default: false
+    },
+
+    // cart:{
+    //     items:[{
+    //         productId:{
+    //             type: mongoose.Types.ObjectId,
+    //             ref: 'Product',
+    //             require: true
+    //         },
+    //         qty:{
+    //             type: Number,
+    //             require: true
+    //         }
+    //     }],
+    //     totalPrice: Number
+    // }
 
 
 
 },{timestamps: true})
+
 
 module.exports = mongoose.model("User", userSchema)
