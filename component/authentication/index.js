@@ -11,4 +11,10 @@ router.post('/login', passport.authenticate('local', {
 router.get('/logout', authController.logout)
 router.post('/register', authController.register)
 router.get('/register', authController.renderRegister )
-module.exports = router
+router.get('/google', passport.authenticate('google',{scope: ['profile', 'email']}))
+router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  }
+);module.exports = router
