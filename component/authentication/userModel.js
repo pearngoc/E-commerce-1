@@ -9,8 +9,6 @@ const userSchema = new Schema({
     },
     password: {
         type: String,
-        required: true,
-        min: 6,
     },
     username: {
         type: String,
@@ -25,7 +23,7 @@ const userSchema = new Schema({
 
     avatar: {
         type: String,
-        default: "",
+        default: "https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg",
     },
 
     phoneNumber:{
@@ -44,6 +42,17 @@ const userSchema = new Schema({
         type: Boolean,
         default: false
     },
+
+    authType:{
+        type: String,
+        enum: ['local', 'google'],
+        default: 'local'
+    },
+
+    authGoogleID:{
+        type: String,
+        default: null,
+    }
 
     // cart:{
     //     items:[{
