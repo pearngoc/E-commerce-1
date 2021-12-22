@@ -52,6 +52,15 @@ const userSchema = new Schema({
     authGoogleID:{
         type: String,
         default: null,
+    }, 
+
+    activationString:{
+        type: String,
+        default: "",
+    }, 
+    
+    status:{
+        type: String,
     }
 
     // cart:{
