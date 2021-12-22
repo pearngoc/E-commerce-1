@@ -11,6 +11,11 @@ router.post('/login', passport.authenticate('local', {
 router.get('/logout', authController.logout)
 router.post('/register', authController.register)
 router.get('/register', authController.renderRegister )
+router.get('/register/activate', authController.activate)
+router.get('/reset-password', authController.getEmail)
+router.get('/forgot-password', authController.forgotPassword)
+router.get('/reset-password/reset',authController.resetPassword)
+router.post('/reset-password/reset',authController.updatePassword)
 router.get('/google', passport.authenticate('google',{scope: ['profile', 'email']}))
 router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/login' }),
   function(req, res) {

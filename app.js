@@ -7,6 +7,8 @@ const session = require('express-session')
 const db = require('./config/db')
 const passport = require('./passport')
 const methodOverride = require('method-override')
+require('dotenv').config();
+
 
 const indexRouter = require('./routes/index');
 const aboutRouter = require('./routes/about');
