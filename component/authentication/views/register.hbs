@@ -11,29 +11,88 @@
 
                 <form class="mx-1 mx-md-4" action="/register" method="POST">
 
+                  {{#each this.errors}}
+                  <div class="d-flex flex-row align-items-center mb-4 flex-center errors alert alert-warning alert-dismissible fade show">
+                    <div class="form-outline flex-fill mb-0 ">
+                        <i class="fas fa-exclamation-triangle mr-2"></i>{{this.msg}}
+                    </div>
+                  </div>
+                  {{/each}}
+
+                  {{#if (isdefined username)}}
                   <div class="d-flex flex-row align-items-center mb-4 flex-center">
                     <i class="fas fa-user fa-lg me-3 fa-fw icon-sign_up"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="text" id="form3Example1c" class="form-control" placeholder="Enter your user name" name="username"/>
+                      <input type="text" id="form3Example1c" class="form-control" placeholder="Enter your user name" name="username" value="{{this.username}}"/>
                       <label class="form-label" for="form3Example1c"></label>
                     </div>
                   </div>
+                  {{else}}
+                   <div class="d-flex flex-row align-items-center mb-4 flex-center">
+                    <i class="fas fa-user fa-lg me-3 fa-fw icon-sign_up"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="text" id="form3Example1c" class="form-control" placeholder="Enter your user name" name="username" value=""/>
+                      <label class="form-label" for="form3Example1c"></label>
+                    </div>
+                  </div>
+                  {{/if}}
+                  
 
+                  {{#if (isdefined email)}}
                   <div class="d-flex flex-row align-items-center mb-4 flex-center">
                     <i class="fas fa-envelope fa-lg me-3 fa-fw icon-sign_up"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="email" id="form3Example3c" class="form-control" placeholder="Enter your email" name="email"/>
+                      <input type="email" id="form3Example3c" class="form-control" placeholder="Enter your email" name="email" value="{{this.email}}"/>
                       <label class="form-label" for="form3Example3c"></label>
                     </div>
                   </div>
+                  {{else}}
+                   <div class="d-flex flex-row align-items-center mb-4 flex-center">
+                    <i class="fas fa-envelope fa-lg me-3 fa-fw icon-sign_up"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="email" id="form3Example3c" class="form-control" placeholder="Enter your email" name="email" value=""/>
+                      <label class="form-label" for="form3Example3c"></label>
+                    </div>
+                  </div>
+                  {{/if}}
 
+                  {{#if (isdefined password)}}
                   <div class="d-flex flex-row align-items-center mb-4 flex-center">
                     <i class="fas fa-lock fa-lg me-3 fa-fw icon-sign_up"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="password" id="form3Example4c" class="form-control" placeholder="Enter your password" name="password"/>
+                      <input type="password" id="form3Example4c" class="form-control" placeholder="Enter your password" name="password" value="{{this.password}}"/>
                       <label class="form-label" for="form3Example4c"></label>
                     </div>
                   </div>
+                  {{else}}
+                   <div class="d-flex flex-row align-items-center mb-4 flex-center">
+                    <i class="fas fa-lock fa-lg me-3 fa-fw icon-sign_up"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="password" id="form3Example4c" class="form-control" placeholder="Enter your password" name="password" value=""/>
+                      <label class="form-label" for="form3Example4c"></label>
+                    </div>
+                  </div>
+                  {{/if}}
+                  
+                  {{#if (isdefined repassword)}}
+                  <div class="d-flex flex-row align-items-center mb-4 flex-center">
+                    <i class="fas fa-lock fa-lg me-3 fa-fw icon-sign_up"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="password" id="form3Example4c" class="form-control" placeholder="Confirm Password" name="repassword" value="{{this.repassword}}"/>
+                      <label class="form-label" for="form3Example4c"></label>
+                    </div>
+                  </div>
+                  {{else}}
+                  <div class="d-flex flex-row align-items-center mb-4 flex-center">
+                    <i class="fas fa-lock fa-lg me-3 fa-fw icon-sign_up"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="password" id="form3Example4c" class="form-control" placeholder="Confirm Password" name="repassword" value=""/>
+                      <label class="form-label" for="form3Example4c"></label>
+                    </div>
+                  </div>
+                  {{/if}}
+
+                  
 
                   {{!-- <div class="d-flex flex-row align-items-center mb-4 flex-center">
                     <i class="fas fa-key fa-lg me-3 fa-fw icon-sign_up"></i>
@@ -43,7 +102,7 @@
                     </div>
                   </div> --}}
 
-                  <div class="flex-center term sign-up-term" >
+                  {{!-- <div class="flex-center term sign-up-term" >
                     <input
                       class="checkbox-signup me-2"
                       type="checkbox"
@@ -53,7 +112,7 @@
                     <label class="check-label" for="form2Example3">
                       I agree all statements in <a href="#!">Terms of service</a>
                     </label>
-                  </div>
+                  </div> --}}
 
                   <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                     <button type="submit" class="btn btn-primary btn-lg">Register</button>

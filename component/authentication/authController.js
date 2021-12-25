@@ -1,4 +1,5 @@
 const userService = require('./userService')
+const userModel = require('./userModel')
 exports.login = (req, res) => {
     const wrong = req.query['wrong'] !== undefined;
 
@@ -14,10 +15,44 @@ exports.renderRegister = (req, res)=>{
     res.render('authentication/views/register')
 }
 
-exports.register = async(req, res)=>{
-    const {username, email, password}  = req.body
-    const user = await userService.register(username, email, password); 
-    res.redirect('/login');
+exports.register = async (req, res)=>{
+    const {username, email, password, repassword}  = req.body;
+    let errors = [];
+
+    if(!username || !email || !password || !repassword){
+        errors.push({msg: "Please enter all fields"})
+    }else if(password.length < 6){
+        console.log(password.length);
+        errors.push({ msg: "Password must be at least 6 characters" });
+    }
+    
+    if(password != repassword){
+        errors.push({msg: "Passwords do not match"})
+    }
+
+    
+
+    await userModel.findOne({username: username}).then(user =>{
+        if(user){
+            errors.push({msg: "Username has been existed!"})
+        }
+        
+    })
+
+
+    if(errors.length > 0){
+        res.render('authentication/views/register', {errors, username, email, password, repassword});
+    }else{
+        userModel.findOne({email: email}).then(async (user) => {
+            if(user){
+                errors.push({msg: "Email already exists"});
+                res.render('authentication/views/register', {errors, username, email, password, repassword});
+            }else{
+                 await userService.register(username, email, password); 
+                res.redirect('/login');
+            }
+        })
+    }
 }
 
 exports.activate = async(req, res, next)=>{
