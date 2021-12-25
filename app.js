@@ -7,6 +7,9 @@ const session = require('express-session')
 const db = require('./config/db')
 const passport = require('./passport')
 const methodOverride = require('method-override')
+const Handlebars = require('hbs')
+const bodyParser = require('body-parser');
+
 require('dotenv').config();
 
 
@@ -26,14 +29,21 @@ db.connect()
 
 const app = express();
 app.use(methodOverride('_method'))
+
+Handlebars.registerHelper('isdefined', function(value){
+  return value !== undefined;
+})
+
 // view engine setup
 app.set('views', [path.join(__dirname, 'views'),path.join(__dirname, 'component')]);
 app.set('view engine', 'hbs');
 
 
 app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -46,6 +56,7 @@ app.use(function(req, res, next){
   res.locals.session  = req.session;
   next();
 })
+
 
 
 
