@@ -9,20 +9,47 @@
           
           <div class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">SIGN IN</div>
           <!-- Email input -->
+           {{#if error}}
+            <div class="form-outline mb-4">
+                <div class="alert alert-warning alert-dismissible fade show"><i class="fas fa-exclamation-triangle mr-2"></i>{{error}}</div>
+            </div>
+          {{else}}
+            {{#if message}}
+            <div class="form-outline mb-4">
+              <div class="alert alert-warning alert-dismissible fade show"><i class="fas fa-exclamation-triangle mr-2"></i>{{message}}</div>
+            </div>
+            {{/if}}
+          {{/if}}
+          
+          {{#if (isdefined username)}}
           <div class="form-outline mb-4">
-            <input type="text" id="form1Example13" class="form-control form-control-lg set--width__input" placeholder="Username" name="username"/>
+            <input type="text" id="form1Example13" class="form-control form-control-lg set--width__input" placeholder="Username" name="username" value="{{username}}"/>
             <label class="form-label" for="form1Example13"></label>
           </div>
+          {{else}}
+          <div class="form-outline mb-4">
+            <input type="text" id="form1Example13" class="form-control form-control-lg set--width__input" placeholder="Username" name="username" />
+            <label class="form-label" for="form1Example13"></label>
+          </div>
+          {{/if}}
 
+          {{#if (isdefined password)}}
           <!-- Password input -->
           <div class="form-outline mb-4">
-            <input type="password" id="form1Example23" class="form-control form-control-lg set--width__input" placeholder="Password" name="password" />
+            <input type="password" id="form1Example23" class="form-control form-control-lg set--width__input" placeholder="Password" name="password" value="{{password}}"/>
             <label class="form-label" for="form1Example23"></label>
           </div>
-
-          {{#if wrong}}
-            <div class="wrong"><i class="fas fa-exclamation-triangle mr-2"></i>Username or password is incorrect</div>
+          {{else}}
+          <div class="form-outline mb-4">
+            <input type="password" id="form1Example23" class="form-control form-control-lg set--width__input" placeholder="Password" name="password"/>
+            <label class="form-label" for="form1Example23"></label>
+          </div>
           {{/if}}
+          
+
+          
+
+          
 
         <!-- Checkbox -->
         <a href="/forgot-password" class = "text-customer forgot-pw">Forgot password?</a>
