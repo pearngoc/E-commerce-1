@@ -1,10 +1,11 @@
 var express = require('express')
 const passport = require('../../passport')
+const checkActive = require('../../middleware/checkActive')
 var router = express.Router();
 
 const authController = require('./authController')
 router.get('/login', authController.login);
-router.post('/login', passport.authenticate('local', { 
+router.post('/login', checkActive ,passport.authenticate('local', { 
                     successRedirect: '/',
                     failureRedirect: '/login?wrong',}));
                     // failureFlash: true }))

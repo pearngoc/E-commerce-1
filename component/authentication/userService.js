@@ -9,8 +9,8 @@ exports.findByUserName = (username)=>{
     }).lean()
 }
 
-exports.validPassword = (password, user)=>{
-    return bcrypt.compare(password, user.password);
+exports.validPassword = async (password, user)=>{
+    return await bcrypt.compare(password, user.password);
 }
 
 exports.register = async (username, email, password)=>{
