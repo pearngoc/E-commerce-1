@@ -20,6 +20,11 @@
                     <h4 class="text-right">My Profile</h4>
                 </div>
                 <form method="POST" action="/me/{{user.id}}?_method=PUT" >
+                {{#if message}}
+                    <div class = "row mt-2 alert alert-warning alert-dismissible fade show">
+                        {{message}}
+                    </div>
+                {{/if}}
                 <div class="row mt-2">
                     {{#if user}}
                     <div class="col-md-6 mt-3"><strong>Username</strong><input type="text" class="form-control" placeholder="username name" value="{{user.username}}" name="username" id="username"></div>
