@@ -33,6 +33,9 @@ app.use(methodOverride('_method'))
 Handlebars.registerHelper('isdefined', function(value){
   return value !== undefined;
 })
+Handlebars.registerHelper('multi', function(price, num){
+  return num * price;
+})
 
 // view engine setup
 app.set('views', [path.join(__dirname, 'views'),path.join(__dirname, 'component')]);

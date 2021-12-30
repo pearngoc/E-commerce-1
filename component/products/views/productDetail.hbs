@@ -1,5 +1,5 @@
 <!-- Cart -->
-<div class="wrap-header-cart js-panel-cart">
+{{!-- <div class="wrap-header-cart js-panel-cart">
     <div class="s-full js-hide-cart"></div>
 
     <div class="header-cart flex-col-l p-l-65 p-r-25">
@@ -81,7 +81,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
 
 <!-- breadcrumb -->
@@ -146,15 +146,20 @@
                     <p class="stext-102 cl3 p-t-23">
                         {{product.summary}}
                     </p>
+
+                     <p class="stext-104 cl2 p-t-23">
+                        <span class = "mr-2">View: </span><i class="fas fa-eye mr-2"></i><span>{{product.view}}</span>
+                    </p>
                     
                     <!--  -->
-                    <div class="p-t-33">
+                    {{!-- <div class="p-t-33">
                         <div class="flex-w flex-r-m p-b-10">
-                            <div class="size-203 flex-c-m respon6">
-                                Size
+
+                            
+                            <div class="size-203 flex-c-m respon6 mr-auto">
                             </div>
 
-                            <div class="size-204 respon6-next">
+                             <div class="size-204 respon6-next">
                                 <div class="rs1-select2 bor8 bg0">
                                     <select class="js-select2" name="time">
                                         <option>Choose an option</option>
@@ -165,10 +170,10 @@
                                     </select>
                                     <div class="dropDownSelect2"></div>
                                 </div>
-                            </div>
-                        </div>
+                            </div>  
+                        </div> --}}
 
-                        <div class="flex-w flex-r-m p-b-10">
+                        {{!-- <div class="flex-w flex-r-m p-b-10">
                             <div class="size-203 flex-c-m respon6">
                                 Color
                             </div>
@@ -185,7 +190,7 @@
                                     <div class="dropDownSelect2"></div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}} 
 
                         <div class="flex-w flex-r-m p-b-10">
                             <div class="size-204 flex-w flex-m respon6-next">
@@ -210,7 +215,7 @@
 
                     <!--  -->
                     <div class="flex-w flex-m p-l-100 p-t-40 respon7">
-                        <div class="flex-m bor9 p-r-10 m-r-11">
+                        {{!-- <div class="flex-m bor9 p-r-10 m-r-11">
                             <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist">
                                 <i class="zmdi zmdi-favorite"></i>
                             </a>
@@ -226,7 +231,11 @@
 
                         <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Google Plus">
                             <i class="fa fa-google-plus"></i>
-                        </a>
+                        </a> --}}
+
+                        {{!-- <div class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100 mr-5" >
+                            
+                        </div> --}}
                     </div>
                 </div>
             </div>

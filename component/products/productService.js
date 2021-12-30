@@ -13,14 +13,16 @@ class Course{
     }
 
     showProductDetail(id){
-        return Product.findOne({ _id: id })
+        return Product.findOne({ _id: id }).lean();
     }
 
     countDocuments(){
         return Product.countDocuments({})
     }
 
-    
+    updateView(id, view){
+        return Product.updateOne({_id: id}, {$set: {view: view}});
+    }
 }
 
 module.exports = new Course();

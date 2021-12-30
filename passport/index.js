@@ -10,13 +10,6 @@ require('dotenv').config()
 passport.use(new LocalStrategy(
   async function(username, password, done) {
     const user = await userService.findByUserName(username);
-    if(!user){
-        return done(null, false, {message: 'Incorrect username'})
-    }
-    const isValid = await userService.validPassword(password, user)
-    if(!isValid){
-        return done(null, false, {message: 'Incorrect password'})
-    }
     return done(null, user);
   }
 ));
@@ -45,6 +38,7 @@ passport.use(new GoogleStrategy({
           email: profile.emails[0].value,
           username: profile.displayName,
           avatar: profile.photos[0].value,
+          status: "activated"
       })
   
       await newUser.save()
@@ -57,7 +51,7 @@ passport.use(new GoogleStrategy({
 ))
 
 passport.serializeUser(function(user, done) {
-    done(null, {id:user._id, username: user.username, email: user.email,phone: user.phoneNumber, address:user.address, avatar: user.avatar});
+    done(null, {id:user._id, username: user.username, email: user.email,phone: user.phoneNumber, address:user.address, avatar: user.avatar, cart: user.cart, totalPrice: user.totalPrice, totalItem: user.totalItem});
 });
   
 passport.deserializeUser(async function(user, done) {
