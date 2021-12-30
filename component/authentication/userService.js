@@ -10,13 +10,16 @@ exports.findByUserName = (username)=>{
 }
 
 exports.validPassword = async (password, user)=>{
-    return await bcrypt.compare(password, user.password);
+    // const hashed_pass = await bcrypt.hash(password, 10);
+    const valid = await bcrypt.compare(password, user.password);
+    return valid;
 }
 
 exports.register = async (username, email, password)=>{
     const passwordHash = await bcrypt.hash(password, 10)
     const activationString = randomString.generate();
 
+    console.log(email);
     const sgMail = require('@sendgrid/mail')
     sgMail.setApiKey(process.env.SENDGRID_API_KEY)
     const msg = {

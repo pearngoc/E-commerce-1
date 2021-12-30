@@ -1,6 +1,4 @@
-const productService = require('./productService')
-const { mutipleMongooseToObject } = require('../../util/mongoose')
-const { mongooseToObject } = require('../../util/mongoose')
+const productService = require('./productService');
 const PAGE_SIZE = 8;
 class CourseController{
     async show(req, res){
@@ -28,7 +26,9 @@ class CourseController{
 
     async showDetail(req, res){
         const product = await productService.showProductDetail(req.params.id)
-        res.render('products/views/productDetail', { product: mongooseToObject(product) })
+        product.view = product.view + 1;
+        await productService.updateView(req.params.id, product.view);
+        res.render('products/views/productDetail', { product: product })
     }
 
     renderFile(req, res){
