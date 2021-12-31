@@ -21,7 +21,7 @@ const cartRouter = require('./component/cart');
 const productRouter = require('./component/products/index');
 const authRouter = require('./component/authentication')
 const loggedInUserGuard = require('./middleware/loggerInUserGuard')
-const profileUserRouter = require('./routes/profile')
+const profileUserRouter = require('./component/user')
 
 
 // connect to DB

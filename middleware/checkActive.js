@@ -3,8 +3,7 @@ const userService = require('../component/authentication/userService')
 module.exports = async (req, res, next) => {
     const {username, password} = req.body;
     const user = await userModel.find({username: username}).lean();
-    const checkValid = await userService.validPassword(password, user[0]);
-    if(user && checkValid){
+    if(user[0] && userService.validPassword(password, user[0])){
         if(user[0].status == "activated"){
             next();
         }else{
