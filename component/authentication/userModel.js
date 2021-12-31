@@ -61,24 +61,22 @@ const userSchema = new Schema({
     
     status:{
         type: String,
+    },
+
+    cart:{
+        type:Array,
+        default: []
+    },
+
+    totalPrice:{
+        type: Number,
+        default: 0,
+    }, 
+
+    totalItem:{
+        type: Number,
+        default: 0
     }
-
-    // cart:{
-    //     items:[{
-    //         productId:{
-    //             type: mongoose.Types.ObjectId,
-    //             ref: 'Product',
-    //             require: true
-    //         },
-    //         qty:{
-    //             type: Number,
-    //             require: true
-    //         }
-    //     }],
-    //     totalPrice: Number
-    // }
-
-
 
 },{timestamps: true})
 
