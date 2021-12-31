@@ -1,9 +1,11 @@
 const userService = require('./userService')
 const userModel = require('./userModel')
 exports.login = (req, res) => {
+    let error;
     const wrong = req.query['wrong'] !== undefined;
-
-    res.render('authentication/views/login', {wrong});
+    if(wrong) 
+        error = "Password is not correct"
+    res.render('authentication/views/login', {error});
 }
 
 exports.logout = (req, res) =>{
@@ -93,7 +95,7 @@ exports.forgotPassword = (req, res) =>{
 
 exports.updatePassword = async (req, res) =>{
     const {email, password} = req.body;
-    const result = await userService.updatePassword(email, password);
+    const result = await userService.updatePassword("",email, password);
     if(result){
         const user = await userService.findByEmail(email);
         req.login(user, function(err){

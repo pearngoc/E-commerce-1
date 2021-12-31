@@ -55,12 +55,20 @@ exports.activate = async (email, activationString) => {
     return true;
 }
 
-exports.updatePassword = async (email, password) =>{
-    const user = await userModel.findOne({email}).lean();
-    if(!user) return false;
-    const hashPassword = await bcrypt.hash(password, 10);
-    await userModel.updateOne({email}, {$set: {password: hashPassword}})
-    return true;
+exports.updatePassword = async (id,email, password) =>{
+    let user;
+    if(id){
+        const hashPassword = await bcrypt.hash(password, 10);
+        await userModel.updateOne({_id: id}, {$set: {password: hashPassword}});
+        return true;
+    }else if(email){
+        user =  await userModel.findOne({email}).lean();
+        if(!user) return false;
+        const hashPassword = await bcrypt.hash(password, 10);
+        await userModel.updateOne({email}, {$set: {password: hashPassword}})
+        return true;
+    }
+    
 }
 
 exports.sendActivateLinkToResetPassword = async(email) => {
