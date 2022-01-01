@@ -1,12 +1,12 @@
 const Product = require("./productModel");
 
 class Course {
-  show(skip, page_size) {
-    return Product.find({}).skip(skip).limit(page_size);
+  show(skip, page_size, queryObject = {}) {
+    return Product.find(queryObject).skip(skip).limit(page_size).lean();
   }
 
-  showAll() {
-    return Product.find({});
+  showAll(queryObject = {}) {
+    return Product.find(queryObject);
   }
 
   showProductDetail(id) {
