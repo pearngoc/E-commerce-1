@@ -1,28 +1,46 @@
-const Product = require('./productModel')
+const Product = require("./productModel");
 
+class Course {
+  show(skip, page_size) {
+    return Product.find({}).skip(skip).limit(page_size);
+  }
 
-class Course{
-    show(skip, page_size) {
-        return Product.find({})
-               .skip(skip)
-               .limit(page_size)               
-    }
+  showAll() {
+    return Product.find({});
+  }
 
-    showAll(){
-        return Product.find({})
-    }
+  showProductDetail(id) {
+    return Product.findOne({ _id: id }).lean();
+  }
 
-    showProductDetail(id){
-        return Product.findOne({ _id: id }).lean();
-    }
+  async getRelatedProducts(product) {
+    const relatedProducts = await Product.find({
+      $and: [
+        {
+          category: {
+            $in: product.category,
+          },
+        },
+        {
+          _id: {
+            $ne: product._id,
+          },
+        },
+      ],
+    })
+      .limit(10)
+      .lean();
 
-    countDocuments(){
-        return Product.countDocuments({})
-    }
+    return relatedProducts;
+  }
 
-    updateView(id, view){
-        return Product.updateOne({_id: id}, {$set: {view: view}});
-    }
+  countDocuments() {
+    return Product.countDocuments({});
+  }
+
+  updateView(id, view) {
+    return Product.updateOne({ _id: id }, { $set: { view: view } });
+  }
 }
 
 module.exports = new Course();
