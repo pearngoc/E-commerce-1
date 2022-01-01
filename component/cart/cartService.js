@@ -55,9 +55,15 @@ exports.deleteOneItem = async (user, productID)=>{
             price = element.price - element.item.price;
             totalPrice = totalPrice - element.item.price;
             totalItem = totalItem - 1;
-
+            let n = userL.cart.length;
+            console.log(userL.cart);
             if(qty <= 0){
-                userL.cart.splice(index, 1);
+                for(let i = 0; i < n; i++){
+                    if(userL.cart[i].productId === productID){
+                        userL.cart.splice(i, 1);
+                        break;
+                    }
+                }
                 user.cart = userL.cart;
                 await userModel.findOneAndUpdate({_id: user.id}, {cart: user.cart, totalPrice: totalPrice, totalItem: totalItem})
             }else{
@@ -65,8 +71,8 @@ exports.deleteOneItem = async (user, productID)=>{
                 user.cart[index].price = price;    
             }
             user.totalPrice = totalPrice;
-            user.totalItem = totalItem;
-            ++index;  
+            user.totalItem = totalItem;  
+            ++index;
         }
     }
     if(qty && price){

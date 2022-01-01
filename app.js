@@ -37,6 +37,16 @@ Handlebars.registerHelper('multi', function(price, num){
   return num * price;
 })
 
+Handlebars.registerHelper('switch', function(value, options) {
+  this.switch_value = value;
+  return options.fn(this);
+});
+
+Handlebars.registerHelper('case', function(value, options) {
+  if (value == this.switch_value) {
+    return options.fn(this);
+  }
+});
 // view engine setup
 app.set('views', [path.join(__dirname, 'views'),path.join(__dirname, 'component')]);
 app.set('view engine', 'hbs');
