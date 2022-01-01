@@ -1,0 +1,282 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
+
+/* .card {
+    margin-top: 50px;
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 0.10rem
+} */
+
+/* .card-header:first-child {
+    border-radius: calc(0.37rem - 1px) calc(0.37rem - 1px) 0 0
+}
+
+.card-header {
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: #fff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1)
+} */
+
+.track {
+    position: relative;
+    background-color: #ddd;
+    height: 7px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin-bottom: 60px;
+    margin-top: 50px
+}
+
+.track .step {
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    width: 25%;
+    margin-top: -18px;
+    text-align: center;
+    position: relative
+}
+
+.track .step.active:before {
+    background: #FF5722
+}
+
+.track .step::before {
+    height: 7px;
+    position: absolute;
+    content: "";
+    width: 100%;
+    left: 0;
+    top: 18px
+}
+
+.track .step.active .icon {
+    background: #ee5435;
+    color: #fff
+}
+
+.track .icon {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    position: relative;
+    border-radius: 100%;
+    background: #ddd
+}
+
+.track .step.active .text {
+    font-weight: 400;
+    color: #000
+}
+
+.track .text {
+    display: block;
+    margin-top: 7px
+}
+
+/* .itemside {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%
+}
+
+.itemside .aside {
+    position: relative;
+    -ms-flex-negative: 0;
+    flex-shrink: 0
+}
+
+.img-sm {
+    width: 80px;
+    height: 80px;
+    padding: 7px
+} */
+
+/* ul.row,
+ul.row-sm {
+    list-style: none;
+    padding: 0
+}
+
+.itemside .info {
+    padding-left: 15px;
+    padding-right: 7px
+}
+
+.itemside .title {
+    display: block;
+    margin-bottom: 5px;
+    color: #212529
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 1rem
+} */
+
+/* .btn-warning {
+    color: #ffffff;
+    background-color: #ee5435;
+    border-color: #ee5435;
+    border-radius: 1px
+}
+
+.btn-warning:hover {
+    color: #ffffff;
+    background-color: #ff2b00;
+    border-color: #ff2b00;
+    border-radius: 1px
+} */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+.details-mt{
+    margin-top: 100px;
+}
+th{
+    width: 30%;
+}
+#order-heading {
+    background-color: #edf4f7;
+    position: relative;
+    border-top-left-radius: 25px;
+    max-width: 800px;
+    padding-top: 20px;
+    margin: 30px auto 0px
+}
+
+#order-heading .text-uppercase {
+    font-size: 0.9rem;
+    color: #777;
+    font-weight: 600
+}
+
+#order-heading .h4 {
+    font-weight: 600
+}
+
+#order-heading .h4+div p {
+    font-size: 0.8rem;
+    color: #777
+}
+
+.close {
+    padding: 10px 15px;
+    background-color: #777;
+    border-radius: 50%;
+    position: absolute;
+    right: -15px;
+    top: -20px
+}
+
+.wrapper {
+    padding: 0px 50px 50px;
+    max-width: 800px;
+    margin: 0px auto 40px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px
+}
+
+.table th {
+    border-top: none
+}
+
+.table thead tr.text-uppercase th {
+    font-size: 0.8rem;
+    padding-left: 0px;
+    padding-right: 0px
+}
+
+.table tbody tr th,
+.table tbody tr td {
+    font-size: 0.9rem;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 5px
+}
+
+.table-responsive {
+    height: 100px
+}
+
+.list div b {
+    font-size: 0.8rem
+}
+
+.list .order-item {
+    font-weight: 600;
+    color: #6db3ec
+}
+
+.list:hover {
+    background-color: #f4f4f4;
+    cursor: pointer;
+    border-radius: 5px
+}
+
+label {
+    margin-bottom: 0;
+    padding: 0;
+    font-weight: 900
+}
+
+
+
+.price {
+    /* color: #5cb99a; */
+    font-weight: 700
+}
+
+p.text-justify {
+    font-size: 0.9rem;
+    margin: 0
+}
+
+.row {
+    margin: 0px
+}
+
+.subscriptions {
+    border: 1px solid #ddd;
+    border-left: 5px solid #ffa500;
+    padding: 10px
+}
+
+.subscriptions div {
+    font-size: 0.9rem
+}
+
+@media(max-width: 425px) {
+    .wrapper {
+        padding: 20px
+    }
+
+    body {
+        font-size: 0.85rem
+    }
+
+    .subscriptions div {
+        padding-left: 5px
+    }
+
+    img+label {
+        font-size: 0.75rem
+    }
+}
