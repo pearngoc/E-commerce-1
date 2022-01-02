@@ -5,18 +5,16 @@ const contentInput = document.getElementById("commentContent");
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
-  console.log("AJAX")
+  console.log("AJAX");
 
   const producID = productInput.value;
   const userID = userInput.value;
   const content = contentInput.value;
 
-
-
   let hasError = false;
 
-  if (!content) { 
-      hasError = true;
+  if (!content) {
+    hasError = true;
   }
 
   if (!userID) {
