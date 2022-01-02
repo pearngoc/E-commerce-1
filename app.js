@@ -21,7 +21,7 @@ const productRouter = require("./component/products/index");
 const authRouter = require("./component/authentication");
 const loggedInUserGuard = require("./middleware/loggerInUserGuard");
 const profileUserRouter = require("./component/user");
-
+const commentRouter = require("./component/comment/index");
 // connect to DB
 db.connect();
 
@@ -79,7 +79,7 @@ app.use("/products", productRouter);
 app.use("/me", loggedInUserGuard, profileUserRouter);
 app.use("/blog", blogRouter);
 app.use("/cart", cartRouter);
-
+app.use("/comment", commentRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));

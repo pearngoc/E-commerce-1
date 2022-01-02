@@ -5,39 +5,31 @@ const contentInput = document.getElementById("commentContent");
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
-  console.log("AJAX");
-
-  const producID = productInput.value;
-  const userID = userInput.value;
-  const content = contentInput.value;
 
   let hasError = false;
+  const productID = productInput.value;
+  const userID = userInput.value;
+  const content = contentInput.value;
+    if(!userID) hasError = true;
 
-  if (!content) {
-    hasError = true;
-  }
-
-  if (!userID) {
-    hasError = true;
-  }
-  if (!productID) {
-    hasError = true;
-  }
   const data = {
-    producID,
+    productID,
     userID,
-    content,
+    content
   };
 
   console.log({ data });
 
   if (!hasError) {
-    fetch("/products/comment/postComment", {
+    fetch("/comment/postComment", {
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
       method: "POST",
       body: JSON.stringify(data),
     });
+  }
+  else {
+    window.location = "/login";
   }
 });

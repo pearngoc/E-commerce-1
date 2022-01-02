@@ -64,16 +64,6 @@ class CourseController {
   renderFile(req, res) {
     res.render("products/views/products", {});
   }
-  async postComment(req,res){
-    if(req.user){
-      const { productID, userID, content } = req.body;
-    await productService.comment({ productID, userID, content });
-    res.status(201).json(productID);
-    }
-    else {
-      res.redirect('/login')
-    }
-  }
 }
 
 module.exports = new CourseController();

@@ -388,19 +388,18 @@
                                         <div class="row p-b-25">
                                             <div class="col-12 p-b-5">
                                                 <label class="stext-102 cl3" for="review">Your review</label>
-                                                <intput id="producID" name="productID" value={{product._id}}
-                                                    type="hidden" readonly></intput>
+                                                
                                                 <input class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10"
                                                     id="commentContent" name="commentContent"></input>
-                                                {{#if user}}
-                                                <intput id="userID" name="userID" value={{user.id}} type="hidden"
-                                                    readonly></intput>
-                                                {{/if}}
+                                               
                                             </div>
 
 
                                         </div>
-
+                                        <input type="text" value="{{product._id}}" style="display: none;" id = "producID"> 
+                                        
+                                        <input type="text" value="{{user.id}}" style="display: none;" id = "userID"> 
+                                           
                                         <button type="submit"
                                             class="flex-c-m stext-101 cl0 size-112 bg7 bor11 hov-btn3 p-lr-15 trans-04 m-b-10">
                                             Submit
