@@ -6,5 +6,5 @@ const productController = require('./productController')
 router.get('/', productController.renderFile);
 router.get('/pagination', productController.show);
 router.get('/:id', productController.showDetail);
-
+router.post('/comment/postComment', productController.postComment);
 module.exports = router;
