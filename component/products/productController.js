@@ -1,4 +1,5 @@
 const productService = require("./productService");
+const commentService = require("../comment/commentService")
 const queryUtils = require("../../utils/queryUtils");
 const PAGE_SIZE = 8;
 class CourseController {
@@ -52,12 +53,14 @@ class CourseController {
   async showDetail(req, res) {
     const product = await productService.showProductDetail(req.params.id);
     const relatedProducts = await productService.getRelatedProducts(product);
-
+    const comments = await commentService.showComment(req.params.id);
+    console.log(comments);
     product.view = product.view + 1;
     await productService.updateView(req.params.id, product.view);
     res.render("products/views/productDetail", {
       product: product,
       relatedProducts,
+      comments,
     });
   }
 

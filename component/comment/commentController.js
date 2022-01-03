@@ -10,7 +10,6 @@ class CourseController {
     res.status(201).json(productID);
     }
     else {
-      console.log("Login");
       res.redirect('/login'); 
     }
   }

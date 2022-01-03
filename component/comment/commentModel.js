@@ -1,7 +1,7 @@
 const { create } = require("hbs");
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-
+const User = require("../authentication/userModel")
 const commentSchema = new Schema({
     productID:{
         type: String,
@@ -9,10 +9,8 @@ const commentSchema = new Schema({
         //unique: true,
     },
 
-    userID:{
-        type: String,
-        require: true,
-    },
+    userID: {type: Schema.Types.ObjectId, ref: "User"},
+
 
     content:{
         type: String,
