@@ -1,17 +1,16 @@
-const userModel = require('../authentication/userModel');
-const Cart = require('./cartModel')
+const Cart = require('./cartUtils')
 const cartService = require('./cartService')
+const cartModel = require('./cartModel');
+const productService = require('../products/productModel');
 module.exports.addToCart = async(req, res) => {
     var productId = req.params.id;
     
-    
-    const product = await cartService.findProduct(productId);
     if(req.user){
-        await cartService.addItemToCart(req.user,product, productId);
-        
+        await cartService.addItemToCart(req.user,productId);
     }else{
+        const product = await productService.findOne({_id: productId})
         var cart = new Cart(req.session.cart ? req.session.cart : {});
-        cart.add(product, product.id);
+        cart.add(product, productId);
         req.session.cart = cart;
         console.log(req.session.cart);
     }
@@ -38,7 +37,6 @@ module.exports.insertItem = async (req, res)=>{
     }
    else{
     var cart = new Cart(req.session.cart ? req.session.cart : {});
-
     cart.addByOne(productId);
     req.session.cart = cart;
    }
@@ -53,11 +51,30 @@ module.exports.show = async(req, res)=>{
         }
         
         var cart = new Cart(req.session.cart);
-        console.log(cart.generateArray());
         res.render('cart/views/cart', {products: cart.generateArray(), totalPrice: cart.totalPrice})
     }else{
-        const products = await userModel.find({_id: req.user.id})
-        res.render('cart/views/cart',{products: products[0].cart, totalPrice: products[0].totalPrice});
+        if(req.session.cart){
+            const carts = await cartService.findCustomer(req.user.id)
+            if(carts){
+                const cartSessionTemp  = cartService.convertArrayForSessionCart(req.session.cart.items);
+                //console.log(carts)
+                await cartService.synchCart(carts, req.user, cartSessionTemp)
+                //console.log(cartSessionTemp);
+            }else{
+                const cartSession = cartService.convertArrayForSessionCart(req.session.cart.items);
+                await cartService.createCart( req.user, cartSession)
+            }
+        }
+        const carts = await cartService.findCart(req.user)
+        if(!carts){
+            return res.render('cart/views/cart', {products: null})
+        }else{
+            const products = cartService.convertArray(carts);
+            const cart = cartService.convertCart(carts);
+            const totalPrice = cartService.totalPrice(products);
+            res.render('cart/views/cart',{products: products, totalPrice: totalPrice, cart: cart, idCart: carts._id});
+        }
+        
     }
     
 }

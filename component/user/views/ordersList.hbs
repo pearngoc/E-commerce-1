@@ -150,7 +150,7 @@
                         <a class="nav-link active" href="/me/change-password">Change Password</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Tracking</a>
+                        <a class="nav-link" href="/me/orders">Tracking</a>
                     </li>
                 </ul>
             </div>
@@ -184,7 +184,7 @@
                             <td>{{this.createdAt}}</td>                        
                             <td><span class="status text-success">&bull;</span>{{this.status}}</td>
                             <td>${{this.totalPrice}}</td>
-                            <td><a href="/me/orders/details/{{this._id}}" class="view" title="View Details" data-toggle="tooltip"><i class="fas fa-chevron-right"></i></a></td>
+                            <td><a href="/me/orders/details/{{this.id}}" class="view" title="View Details" data-toggle="tooltip"><i class="fas fa-chevron-right"></i></a></td>
                         </tr>
                         {{/each}}
                         {{!-- <tr>

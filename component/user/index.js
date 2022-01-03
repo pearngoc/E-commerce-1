@@ -7,6 +7,7 @@ router.get('/', profileController.showProfile);
 router.get('/orders', ordersController.showOrders);
 router.get('/orders/details/:id', ordersController.showDetail);
 router.get('/change-password', profileController.showChangePassword);
+router.post('/check-out', ordersController.getCart)
 router.put('/change-password/:id', profileController.changePassword);
 router.put('/:id', profileController.changeProfile);
 
