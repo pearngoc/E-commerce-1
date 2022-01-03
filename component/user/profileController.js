@@ -13,12 +13,13 @@ exports.changeProfile =  async function(req, res, next){
     message = "Username is exists. Please choose another username!";
   }else if(email.length === 1 && email[0]._id.toString() !== req.user.id){
     message = "Email is exists. Please choose another email!"
-  }else if(req.body.phoneNumber.length < 10 || req.body.phoneNumber.length > 11){
-    message = "Phone number is not correct. Please enter phone number again!"
+  }else if(req.body.phoneNumber){
+    if(req.body.phoneNumber.length < 10 || req.body.phoneNumber.length > 11)
+      message = "Phone number is not correct. Please enter phone number again!"
   }
 
   if(message){
-      res.render('user/view/profile', {message});
+      res.render('user/views/profile', {message});
   }
   else{
     const user = profileService.updateUser(req.params.id, req.body);

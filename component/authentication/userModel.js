@@ -63,21 +63,6 @@ const userSchema = new Schema({
         type: String,
     },
 
-    cart:{
-        type:Array,
-        default: []
-    },
-
-    totalPrice:{
-        type: Number,
-        default: 0,
-    }, 
-
-    totalItem:{
-        type: Number,
-        default: 0
-    }
-
 },{timestamps: true})
 
 
