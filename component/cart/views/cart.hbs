@@ -102,12 +102,12 @@
 
 <!-- Shoping Cart --> 
 {{#if products}} 
-<form class="bg0 p-t-75 p-b-85" method="POST" action="/me/check-out">
+<div class="bg0 p-t-75 p-b-85">
     <div class="container">
         <div class="row">
             <div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
                 <div class="m-l-25 m-r--38 m-lr-0-xl">
-                    <div class="wrap-table-shopping-cart">
+                    <div class="wrap-table-shopping-cart" style="padding-right: 20px;">
                         <table class="table-shopping-cart">
                             <tr class="table_head">
                                 <th class="column-1">Product</th>
@@ -141,6 +141,16 @@
                                         </div>
                                     </td>
                                     <td class="column-5">$ {{this.totalOfEachItem}}</td>
+                    
+                                    <td class="column-6">
+                                    <form action="/cart/reduce-item" method="POST">
+                                        <input type = 'hidden' name="productID" value="{{this._id}}">
+                                        <input type = 'hidden' name="qty" value="{{this.qty}}">
+                                        <button type = "submit" class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button>
+                                    </form>
+                                    </td>
+
+
                                 </tr>
                                 
                                 {{/each}}
@@ -279,7 +289,7 @@
                                     </select>
                                     <div class="dropDownSelect2"></div>
                                 </div> --}}
-                        
+                                <form  method="POST" action="/me/check-out">
                                 <input type="hidden" name="cart" value="{{cart}}">
                                 <input type="hidden" name="idCart" value="{{idCart}}">
                                 <div class="bor8 bg0 m-b-12">
@@ -289,7 +299,7 @@
                                 <div class="bor8 bg0 m-b-22">
                                     <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="address" placeholder="address" value="{{user.address}}">
                                 </div>
-
+                               
                                 
                             
                                     
@@ -316,11 +326,12 @@
                     <button type = "submit" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
                         Proceed to Checkout
                     </button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-</form>
+
 {{else}}
 
 <form class="bg0 p-t-75 p-b-85">

@@ -1,7 +1,7 @@
 const orderSchema = require('./ordersSchema')
 const cartSchema = require('../cart/cartModel')
 const ordersService = require('./ordersService');
-const { convertArray } = require('../cart/cartService');
+const PAGE_SIZE = 4;
 exports.getCart = async (req, res) =>{
     const phoneNumber = req.body.phoneNumber;
     const address = req.body.address;
@@ -20,6 +20,7 @@ exports.getCart = async (req, res) =>{
         address: address,
         phone: phoneNumber,
     })
+    req.user.totalItem = 0;
     const result =  await order.save();
     await cartSchema.findOneAndDelete({_id: idCart});
 
@@ -42,7 +43,25 @@ exports.showDetail = async (req, res)=>{
     const totalPrice = ordersService.totalPrice(billDetails[0].items);
     const totalItem = ordersService.totalItem(billDetails[0].items)
     const billDetail = ordersService.convertArrayDetail(billDetails, totalPrice, totalItem)
-    console.log(billDetail)
 
     res.render('user/views/orderDetail', {billDetail});
+}
+
+exports.getOrdersPage = async(req, res)=>{
+    
+    let { page } = req.query;
+    let orders;
+
+    if (page) {
+        page = parseInt(page);
+        if (page < 1) page = 1;
+        const skip = (page - 1) * PAGE_SIZE;
+        orders = await ordersService.show(skip, PAGE_SIZE, req.user);
+        var total = await ordersService.countDocuments(req.user);
+
+        res.json({
+            sumPage: total,
+            orders: orders,
+        });
+    }
 }

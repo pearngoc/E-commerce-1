@@ -8,5 +8,5 @@ router.get('/', cartController.show);
 router.get('/add-to-cart/:id', cartController.addToCart);
 router.get('/reduce/:id', cartController.removeItem);
 router.get('/insert/:id', cartController.insertItem);
-
+router.post('/reduce-item', cartController.reduceElement);
 module.exports = router;
