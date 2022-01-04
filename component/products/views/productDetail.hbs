@@ -352,8 +352,12 @@
                             <div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto">
                                 <div class="p-b-30 m-lr-15-sm">
                                     <!-- Review -->
+                                   
                                     <div id="commentDisplay">
-                                        {{#each comments}}
+                                         <table>
+                                        <tbody>
+                                        {{#each cm}}
+                                        <tr>
                                         <div class="flex-w flex-t p-b-30">
                                             <div class="wrap-pic-fix size-109 bor0 of-hidden m-r-18 m-t-6">
                                                 <img src="{{userID.avatar}}" alt="AVATAR">
@@ -373,8 +377,21 @@
                                                 </p>
                                             </div>
                                         </div>
+                                        </tr>
                                         {{/each}}
+                                        <tr>
+                                            <td colspan="5">
+                                                <nav aria-label="Page navigation example">
+                                                    <ul class="pagination" style="justify-content: flex-end;">
+                                                    {{#getPagination}}{{/getPagination}}
+                                                    </ul>
+                                                </nav>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                        </table>
                                     </div>
+                                    
                                 </div>
                                 <!-- Add review -->
                                 

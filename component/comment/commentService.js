@@ -11,6 +11,15 @@ class Course {
         'username avatar',
     });
   }
+  getCommentPerPage(page, perPage, id){
+    return Comment.find({productID: id}).skip((page - 1) * perPage)
+    .limit(perPage).sort({"createdAt": -1}).populate({
+      path: 'userID',
+      select:
+        'username avatar',
+    })
+    .lean();
+  }
   async comment({ productID, userID, content }) {
     const user = await User.findOne({_id: mongoose.Types.ObjectId(userID)}).lean();
     console.log(user._id);
@@ -25,6 +34,9 @@ class Course {
         return true;
       } else return false;
     });
+  }
+  countCommnet(id) {
+    return Comment.find({productID: id}).count();
   }
 }
 
