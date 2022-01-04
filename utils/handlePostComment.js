@@ -5,6 +5,7 @@ const contentInput = document.getElementById("commentContent");
 const usernameInput = document.getElementById("userName");
 const userAvatarInput = document.getElementById("userAvatar");
 const showComment = document.getElementById("commentDisplay");
+
 form.addEventListener("submit", (event) => {
   event.preventDefault();
 
