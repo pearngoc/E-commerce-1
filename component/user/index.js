@@ -5,6 +5,7 @@ const ordersController = require('./ordersController')
 
 router.get('/', profileController.showProfile);
 router.get('/orders', ordersController.showOrders);
+router.get('/orders/pagination', ordersController.getOrdersPage);
 router.get('/orders/details/:id', ordersController.showDetail);
 router.get('/change-password', profileController.showChangePassword);
 router.post('/check-out', ordersController.getCart)

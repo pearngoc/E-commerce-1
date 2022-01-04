@@ -337,6 +337,7 @@ let params = {};
   });
 })(jQuery);
 
+
 function loadPage(page) {
   $(".content").html(" ");
   $.ajax({
@@ -420,3 +421,5 @@ $('#paging').pagination({
     
 })
 loadPage(1)
+
+

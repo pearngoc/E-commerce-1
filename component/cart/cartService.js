@@ -4,7 +4,6 @@ module.exports.findProduct = (id)=>{
 }
 
 exports.addItemToCart = async (user, productID)=>{
-
     const carts = await cartModel.findOne({customerID: user.id})
     let count = 0;
     if(carts){
@@ -48,6 +47,7 @@ exports.insertOneItem = async (user, productID) => {
 
 exports.deleteOneItem = async (user, productID)=>{
     const carts = await cartModel.findOne({customerID: user.id, "cart.productID": productID})
+    console.log(carts)
     let count = 0;
     for(let item of carts.cart){
         if(item.productID.toString() === productID){
@@ -55,16 +55,15 @@ exports.deleteOneItem = async (user, productID)=>{
         }
     }
     if(count == 0){
-        await cartModel.update({ customerID: user.id }, { "$pull": { "cart": { "productID": productID } }}, { safe: true, multi:true });
+        await cartModel.updateOne({ customerID: user.id }, { "$pull": { "cart": { "productID": productID } }}, { safe: true, multi:true });
     }else{
         await cartModel.updateOne({customerID: user.id, "cart.productID": productID}, {$set: {"cart.$.qty": count}})
     }
 }       
 
 
-exports.convertArray = (carts) => {
+exports.convertArray = ( carts) => {
     let cart = [];
-
     let totalOfEachItem;
     for(item of carts.cart){
         totalOfEachItem = item.productID.price * item.qty;
@@ -87,6 +86,7 @@ exports.convertArrayForSessionCart = (cart) => {
     let arr = []
     for(let item in cart){
         arr.push({productID: item, qty: cart[item].qty})
+        cart.totalQty += cart[item].qty;
     }
     return arr;
 }
@@ -130,4 +130,8 @@ exports.totalPrice = (products) => {
 
 exports.findCart = async (user) => {
     return await cartModel.findOne({customerID: user.id}).populate('cart.productID');
+}
+
+exports.removeItem = async(user, productID)=>{
+    return await cartModel.updateOne({ customerID: user.id }, { "$pull": { "cart": { "productID": productID } }}, { safe: true, multi:true });
 }
