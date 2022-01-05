@@ -1,81 +1,137 @@
-var Product = require('../products/productModel')
-var userModel = require('../../component/authentication/userModel')
+const cartModel = require('./cartModel')
 module.exports.findProduct = (id)=>{
     return Product.findById({_id: id});
 }
 
-exports.addItemToCart = async (userL, item, productId)=>{
-    const user = await userModel.findOne({_id: userL.id}).lean();
+exports.addItemToCart = async (user, productID)=>{
+    const carts = await cartModel.findOne({customerID: user.id})
+    let count = 0;
+    if(carts){
+        for(let item of carts.cart){
+            if(item.productID.toString() === productID){
+                count = item.qty + 1;
+            }
+        }
+    }
 
-    let totalItem = user.totalItem;
-    let totalPrice = user.totalPrice;
-    totalPrice += item.price;
-    totalItem += 1;
-    const element = {item: item, qty: 1, price: item.price, productId: productId};
-    userL.cart.push(element);
-    userL.totalPrice = totalPrice;
-    userL.totalItem = totalItem;
-    await userModel.updateMany({_id: userL.id}, {$push: {cart: element}, $set: {totalItem: totalItem, totalPrice: totalPrice}}, {multi: true});
+    if(carts){
+        if(count == 0){
+            count = 1
+            await cartModel.updateOne({customerID: user.id}, {$push:{cart: {productID: productID, qty: count}}})
+        }else{
+            
+            await cartModel.updateOne({customerID: user.id, "cart.productID": productID}, {$set: {"cart.$.qty": count}})
+        }
+    }else{
+        count = 1;
+        const newCart = new cartModel({
+            customerID: user.id,
+            cart: [{productID: productID, qty: count}]
+        })
+        await newCart.save();
+    }
+    
+   
 }
 
 exports.insertOneItem = async (user, productID) => {
-    let qty, price, totalItem, totalPrice, index = 0;
-    const userL = await userModel.findOne({_id: user.id});
-    totalPrice = userL.totalPrice;
-    totalItem = userL.totalItem;
-
-    for (let element of userL.cart){
-        if(element.productId === productID){
-            qty = element.qty + 1;
-            price = element.price + element.item.price;
-            totalPrice += element.item.price;
-            totalItem += 1;
-
-            user.totalPrice = totalPrice;
-            user.totalItem = totalItem;
-            user.cart[index].qty = qty;
-            user.cart[index].price = price;
-            ++index;  
+    const carts = await cartModel.findOne({customerID: user.id, "cart.productID": productID})
+    let count = 0;
+    for(let item of carts.cart){
+        if(item.productID.toString() === productID){
+            count = item.qty + 1;
         }
     }
-    if(qty && price){
-        await userModel.updateMany({_id: user.id, "cart.productId": productID}, {$set: {"cart.$.price": price, "cart.$.qty": qty, totalItem: totalItem, totalPrice: totalPrice}})
-    }
+    await cartModel.updateOne({customerID: user.id, "cart.productID": productID}, {$set: {"cart.$.qty": count}})
 }       
 
 exports.deleteOneItem = async (user, productID)=>{
-    let qty, price, totalItem, totalPrice, index = 0;
-    const userL = await userModel.findOne({_id: user.id});
-    totalPrice = userL.totalPrice;
-    totalItem = userL.totalItem;
-
-    for (let element of userL.cart){
-        if(element.productId === productID){
-            qty = element.qty - 1;
-            price = element.price - element.item.price;
-            totalPrice = totalPrice - element.item.price;
-            totalItem = totalItem - 1;
-            let n = userL.cart.length;
-            console.log(userL.cart);
-            if(qty <= 0){
-                for(let i = 0; i < n; i++){
-                    if(userL.cart[i].productId === productID){
-                        userL.cart.splice(i, 1);
-                        break;
-                    }
-                }
-                user.cart = userL.cart;
-                await userModel.findOneAndUpdate({_id: user.id}, {cart: user.cart, totalPrice: totalPrice, totalItem: totalItem})
-            }else{
-                user.cart[index].qty = qty;
-                user.cart[index].price = price;    
-            }
-            user.totalPrice = totalPrice;
-            user.totalItem = totalItem;  
-            ++index;
+    const carts = await cartModel.findOne({customerID: user.id, "cart.productID": productID})
+    console.log(carts)
+    let count = 0;
+    for(let item of carts.cart){
+        if(item.productID.toString() === productID){
+            count = item.qty - 1;
         }
     }
-    if(qty && price){
-        await userModel.updateMany({_id: user.id, "cart.productId": productID}, {$set: {"cart.$.price": price, "cart.$.qty": qty, totalItem: totalItem, totalPrice: totalPrice}})
+    if(count == 0){
+        await cartModel.updateOne({ customerID: user.id }, { "$pull": { "cart": { "productID": productID } }}, { safe: true, multi:true });
+    }else{
+        await cartModel.updateOne({customerID: user.id, "cart.productID": productID}, {$set: {"cart.$.qty": count}})
     }
+}       
+
+
+exports.convertArray = ( carts) => {
+    let cart = [];
+    let totalOfEachItem;
+    for(item of carts.cart){
+        totalOfEachItem = item.productID.price * item.qty;
+        cart.push({thumbnail: item.productID.thumbnail, title: item.productID.title, price: item.productID.price, _id: item.productID._id, totalOfEachItem: totalOfEachItem, qty: item.qty})
+    }
+
+    return cart;
+}
+
+exports.convertCart = (carts) => {
+    let cart = []
+    for(item of carts.cart){
+        cart.push({ productID: item.productID._id, qty: item.qty})
+    }
+    return JSON.stringify(cart);
+
+}
+
+exports.convertArrayForSessionCart = (cart) => {
+    let arr = []
+    for(let item in cart){
+        arr.push({productID: item, qty: cart[item].qty})
+        cart.totalQty += cart[item].qty;
+    }
+    return arr;
+}
+
+exports.findCustomer = async (id) => {
+    return await cartModel.findOne({customerID: id})
+}
+
+exports.synchCart = async(carts, user, cartSessionTemp) => {
+    for(let otherItem of cartSessionTemp){
+        let bool = false;
+        for(let item of carts.cart){
+            if(otherItem.productID === item.productID.toString()){
+                const toItem  = item.qty + otherItem.qty;
+                await cartModel.updateOne({customerID: user.id, "cart.productID": item.productID}, {$set:{"cart.$.qty": toItem}})
+                bool = true;
+                break;
+            }
+        }
+        if(!bool){
+            await cartModel.updateOne({customerID: user.id}, {$push: {cart: {productID: otherItem.productID, qty: otherItem.qty}}})
+        }
+    }
+}
+
+exports.createCart = async (user, cartSession) => {
+    const newCart = new cartModel({
+        customerID: user.id,
+        cart: cartSession
+    })
+    await newCart.save();
+}
+
+exports.totalPrice = (products) => {
+    let totalPrice = 0;
+    for(let item of products){
+        totalPrice += item.totalOfEachItem;
+    }
+    return totalPrice;
+}
+
+exports.findCart = async (user) => {
+    return await cartModel.findOne({customerID: user.id}).populate('cart.productID');
+}
+
+exports.removeItem = async(user, productID)=>{
+    return await cartModel.updateOne({ customerID: user.id }, { "$pull": { "cart": { "productID": productID } }}, { safe: true, multi:true });
 }

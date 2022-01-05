@@ -337,6 +337,7 @@ let params = {};
   });
 })(jQuery);
 
+
 function loadPage(page) {
   $(".content").html(" ");
   $.ajax({
@@ -399,24 +400,25 @@ function loadPage(page) {
     .catch((err) => console.log(err));
 }
 
-$("#paging").pagination({
-  dataSource: "/products/pagination?page=1",
-  locator: "products",
-  totalNumberLocator: function (res) {
-    return res.sumPage;
-  },
-  pageSize: 8,
-  afterPageOnClick: function (event, pageNumber) {
-    loadPage(pageNumber);
-  },
-  afterPreviousOnClick: function (event, pageNumber) {
-    console.log(pageNumber);
-    loadPage(pageNumber);
-  },
-  afterNextOnClick: function (event, pageNumber) {
-    loadPage(pageNumber);
-  },
-});
-loadPage(1);
 
-console.log(123);
+$('#paging').pagination({
+    dataSource: '/products/pagination?page=1',
+    locator: 'products',
+    totalNumberLocator: function(res){
+        return res.sumPage;
+    },
+    pageSize: 8,
+    afterPageOnClick: function(event, pageNumber){
+       loadPage(pageNumber)
+    },
+    afterPreviousOnClick: function(event, pageNumber){
+        console.log(pageNumber)
+        loadPage(pageNumber)
+    },
+    afterNextOnClick: function(event, pageNumber){
+        loadPage(pageNumber)
+    },
+    
+    
+})
+

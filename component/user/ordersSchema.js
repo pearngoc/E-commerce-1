@@ -7,29 +7,17 @@ const orderSchema  = new Schema({
         ref: 'User',
         required: true
     },
-    id:{
-        type: String, 
-        required: true,
-    },
-    username:{
-        type: String,
-        default: ""
-    },
-    items:{
-        type: Array,
-        default: [], 
-        required: true
-    },
+    items: [{
+        productID: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Product'
+        },
+        qty:{
+            type: Number
+        }
+    }],
     phone:{
         type: String,
-        required: true,
-    },
-    totalPrice:{
-        type: Number,
-        required: true
-    },
-    totalItem:{
-        type: Number,
         required: true,
     },
     address:{
@@ -42,7 +30,7 @@ const orderSchema  = new Schema({
     },
     status:{
         type: String, 
-        default: 'order confirmed'
+        default: 'ordered'
     }
 
 }, {timestamps: true})

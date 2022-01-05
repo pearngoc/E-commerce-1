@@ -150,7 +150,7 @@
                         <a class="nav-link active" href="/me/change-password">Change Password</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Tracking</a>
+                        <a class="nav-link" href="/me/orders">Tracking</a>
                     </li>
                 </ul>
             </div>
@@ -177,16 +177,16 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        {{#each listOrder}}
+                    <tbody class = "content_table">
+                        {{!-- {{#each listOrder}}
                         <tr>
                             <td>{{this.id}}</td>
                             <td>{{this.createdAt}}</td>                        
                             <td><span class="status text-success">&bull;</span>{{this.status}}</td>
                             <td>${{this.totalPrice}}</td>
-                            <td><a href="/me/orders/details/{{this._id}}" class="view" title="View Details" data-toggle="tooltip"><i class="fas fa-chevron-right"></i></a></td>
+                            <td><a href="/me/orders/details/{{this.id}}" class="view" title="View Details" data-toggle="tooltip"><i class="fas fa-chevron-right"></i></a></td>
                         </tr>
-                        {{/each}}
+                        {{/each}} --}}
                         {{!-- <tr>
                             <td>2</td>
                             <td><a href="#"><img src="/examples/images/avatar/2.jpg" class="avatar" alt="Avatar"> Paula Wilson</a></td>
@@ -225,6 +225,9 @@
                         </tr> --}}
                     </tbody>
                 </table>
+                <div id='paging_table'>
+
+                </div>
                 {{!-- <div class="clearfix">
                     <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
                     <ul class="pagination">
@@ -247,3 +250,53 @@
     
     </div>
 </div>
+{{!-- <script>
+function loadPageTable(page) {
+  $(".content_table").html(" ");
+  $.ajax({
+    url: "/me/orders/pagination?page=" + page,
+    type: "GET",
+  })
+    .then((rs) => {
+      console.log(rs)
+      rs.orders.forEach((element) => {
+        const item = $(`
+                <tr>
+                    <td>${element._id}</td>
+                    <td>${element.createdAt}</td>                        
+                    <td><span class="status text-success">&bull;</span>${element.status}</td>
+                    <td>123</td>
+                    <td><a href="/me/orders/details/${element._id}" class="view" title="View Details" data-toggle="tooltip"><i class="fas fa-chevron-right"></i></a></td>
+                </tr>
+            `);
+
+        $(".content_table").append(item);
+        //console.log(element)
+      });
+    })
+    .catch((err) => console.log(err));
+}
+
+$('#paging_table').pagination({
+    dataSource: '/me/orders/pagination?page=1',
+    locator: 'orders',
+    totalNumberLocator: function(res){
+        return res.sumPage;
+    },
+    pageSize: 4,
+    afterPageOnClick: function(event, pageNumber){
+       loadPageTable(pageNumber)
+    },
+    afterPreviousOnClick: function(event, pageNumber){
+        console.log(pageNumber)
+        loadPageTable(pageNumber)
+    },
+    afterNextOnClick: function(event, pageNumber){
+        loadPageTable(pageNumber)
+    },
+    
+    
+})
+loadPageTable(1)
+
+</script> --}}
