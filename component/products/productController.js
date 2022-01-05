@@ -1,10 +1,6 @@
 const productService = require("./productService");
-const commentService = require("../comment/commentService")
 const queryUtils = require("../../utils/queryUtils");
 const PAGE_SIZE = 8;
-const pageUtils = require("../../utils/page");
-const PAGE = require("../../constants/page");
-
 class CourseController {
   async show(req, res) {
     let { page, category, sortBy, sortPrice, q } = req.query;
@@ -56,19 +52,12 @@ class CourseController {
   async showDetail(req, res) {
     const product = await productService.showProductDetail(req.params.id);
     const relatedProducts = await productService.getRelatedProducts(product);
+
     product.view = product.view + 1;
     await productService.updateView(req.params.id, product.view);
-    const page = req.query.page || 1;
-    const total = await commentService.countCommnet(req.params.id);
-    const pagination = pageUtils.getPagination(page, total);
-    const cm = await commentService.getCommentPerPage(page, PAGE.perPage,req.params.id);
     res.render("products/views/productDetail", {
       product: product,
       relatedProducts,
-      pagination,
-      curPage: page,
-      cm,
-      url: "/products/"+req.params.id,
     });
   }
 

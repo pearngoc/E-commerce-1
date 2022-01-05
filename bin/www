@@ -6,12 +6,11 @@
 
 // const db = require('../database/process/process')
 const http = require('http');
-const hbsHelper = require("../utils/hbsHelper")
 async function main(){
   try {
         const app = require('../app');
         const debug = require('debug')('web:server');
-        hbsHelper();
+
         // db()
         /**
          * Get port from environment and store in Express.
