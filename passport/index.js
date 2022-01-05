@@ -51,7 +51,7 @@ passport.use(new GoogleStrategy({
 ))
 
 passport.serializeUser(function(user, done) {
-    done(null, {id:user._id, username: user.username, email: user.email,phone: user.phoneNumber, address:user.address, avatar: user.avatar, cart: user.cart, totalPrice: user.totalPrice, totalItem: user.totalItem});
+    done(null, {id:user._id, username: user.username, email: user.email,phone: user.phoneNumber, address:user.address, avatar: user.avatar});
 });
   
 passport.deserializeUser(async function(user, done) {
