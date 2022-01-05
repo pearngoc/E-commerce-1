@@ -400,6 +400,7 @@ function loadPage(page) {
     .catch((err) => console.log(err));
 }
 
+
 $('#paging').pagination({
     dataSource: '/products/pagination?page=1',
     locator: 'products',
@@ -420,6 +421,4 @@ $('#paging').pagination({
     
     
 })
-loadPage(1)
-
 
