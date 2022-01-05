@@ -2,29 +2,51 @@ const orderSchema = require('./ordersSchema')
 const cartSchema = require('../cart/cartModel')
 const ordersService = require('./ordersService');
 const PAGE_SIZE = 4;
-exports.getCart = async (req, res) =>{
-    const phoneNumber = req.body.phoneNumber;
-    const address = req.body.address;
-    const cart = JSON.parse(req.body.cart);
-    const idCart = req.body.idCart;
+exports.checkOut = async (req, res) =>{
+    let {cart, idCart, phoneNumber, address, paypal, card_number, expiry_date, cvc} = req.body;
+    cart = JSON.parse(cart);
 
     if(!phoneNumber || !address){
         req.session.error = "Information can't empty"
         res.redirect('/cart')
+    }else if(!paypal && (!card_number || !expiry_date || !cvc)){
+        req.session.error2 = "Information payment cannot empty!"
+        res.redirect('/cart')
+    }else if(card_number && expiry_date && cvc){
+        if(card_number.length != 16){
+            req.session.error2 = "Card number is not correctly!"
+            res.redirect('/cart')
+        }else if(expiry_date != 5){
+            req.session.error2 = "Expiry date is not correctly!"
+            res.redirect('/cart')
+        }else if(cvc.length != 3){
+            req.session.error2 = "CVC/CVV is not correctly!"
+            res.redirect('/cart')
+        }
     }
 
+
+    let paymentType, detailPayment;
+    if(paypal){
+        paymentType = "Paypal"
+        detailPayment = paypal
+    }else if(card_number){
+        paymentType = "Credit card"
+        detailPayment = card_number
+    }
 
     const order = new orderSchema({
         customerId: req.user.id,
         items: cart,
         address: address,
         phone: phoneNumber,
+        paymentType: paymentType,
+        detailPayment: detailPayment 
     })
     req.user.totalItem = 0;
     const result =  await order.save();
     await cartSchema.findOneAndDelete({_id: idCart});
 
-    // const result = await order.save();
     if(result){
         res.redirect('/me/orders')
     }else{
@@ -33,9 +55,7 @@ exports.getCart = async (req, res) =>{
 }
 
 exports.showOrders = async (req, res)=>{
-    const listOrders = await orderSchema.find({customerId: req.user.id}).populate('items.productID');
-    const listOrder = ordersService.convertArray(listOrders);
-    res.render('user/views/ordersList', {listOrder});
+    res.render('user/views/ordersList');
 }
 
 exports.showDetail = async (req, res)=>{

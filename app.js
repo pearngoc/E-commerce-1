@@ -56,7 +56,7 @@ app.use(logger("dev"));
 // app.use(express.json());
 // app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/utils", express.static(path.join(__dirname, "./utils")));
@@ -69,7 +69,18 @@ app.use(function (req, res, next) {
   res.locals.user = req.user;
   res.locals.session = req.session;
   next();
-});
+})
+
+
+
+app.use('/', indexRouter);
+app.use('/', authRouter);
+app.use('/contact', contactRouter);
+app.use('/about', aboutRouter);
+app.use('/products', productRouter);
+app.use('/me', loggedInUserGuard, profileUserRouter)
+app.use('/blog', blogRouter);
+app.use('/cart', cartRouter);
 
 app.use("/", indexRouter);
 app.use("/", authRouter);

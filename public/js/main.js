@@ -363,7 +363,7 @@ function loadPage(page) {
                         <a href="/products/${
                           element._id
                         }" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                            Quick View
+                           View detail
                         </a>
                     </div>
 

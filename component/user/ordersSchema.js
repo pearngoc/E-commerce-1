@@ -26,12 +26,17 @@ const orderSchema  = new Schema({
     },
     paymentType:{
         type: String,
-        default: 'COD'
+        default: ''
+    },
+    detailPayment:{
+        type: String, 
+        default: ''
     },
     status:{
         type: String, 
         default: 'ordered'
-    }
+    },
+    
 
 }, {timestamps: true})
 
