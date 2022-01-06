@@ -12,9 +12,7 @@ exports.findByUserName = (username) => {
 }
 
 exports.validPassword = async (password, user) => {
-  // const hashed_pass = await bcrypt.hash(password, 10);
   const valid = await bcrypt.compare(password, user.password)
-  console.log("AAA " + valid)
   return valid
 }
 
@@ -65,14 +63,15 @@ exports.activate = async (email, activationString) => {
 exports.updatePassword = async (id, email, password) => {
   let user
   if (id) {
+    console.log(id);
     const hashPassword = await bcrypt.hash(password, 10)
-    await userModel.updateOne({ _id: id }, { $set: { password: hashPassword } })
+    await userModel.findOneAndUpdate({ _id: id }, { $set: { password: hashPassword } })
     return true
   } else if (email) {
     user = await userModel.findOne({ email }).lean()
     if (!user) return false
     const hashPassword = await bcrypt.hash(password, 10)
-    await userModel.updateOne({ email }, { $set: { password: hashPassword } })
+    await userModel.findOneAndUpdate({ email }, { $set: { password: hashPassword } })
     return true
   }
 }

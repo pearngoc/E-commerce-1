@@ -5,46 +5,24 @@
         <img src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-login-form/draw2.svg" class="img-fluid" alt="Phone image">
       </div>
       <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-        <form method="POST" action="#">
+        <form method="POST" id='formLogin'>
           
           <div class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">SIGN IN</div>
           <!-- Email input -->
-           {{#if error}}
-            <div class="form-outline mb-4">
-                <div class="alert alert-warning alert-dismissible fade show"><i class="fas fa-exclamation-triangle mr-2"></i>{{error}}</div>
-            </div>
-          {{else}}
-            {{#if message}}
-            <div class="form-outline mb-4">
-              <div class="alert alert-warning alert-dismissible fade show"><i class="fas fa-exclamation-triangle mr-2"></i>{{message}}</div>
-            </div>
-            {{/if}}
-          {{/if}}
+          <div id='formLoginNotification'></div>
           
-          {{#if (isdefined username)}}
           <div class="form-outline mb-4">
-            <input type="text" id="form1Example13" class="form-control form-control-lg set--width__input" placeholder="Username" name="username" value="{{username}}"/>
+            <input type="text" class="form-control form-control-lg set--width__input" placeholder="Username" name="username" id='formLoginUsername'/>
             <label class="form-label" for="form1Example13"></label>
           </div>
-          {{else}}
-          <div class="form-outline mb-4">
-            <input type="text" id="form1Example13" class="form-control form-control-lg set--width__input" placeholder="Username" name="username" />
-            <label class="form-label" for="form1Example13"></label>
-          </div>
-          {{/if}}
+          
 
-          {{#if (isdefined password)}}
           <!-- Password input -->
           <div class="form-outline mb-4">
-            <input type="password" id="form1Example23" class="form-control form-control-lg set--width__input" placeholder="Password" name="password" value="{{password}}"/>
+            <input type="password"  class="form-control form-control-lg set--width__input" placeholder="Password" name="password" id='formLoginPassword'/>
             <label class="form-label" for="form1Example23"></label>
           </div>
-          {{else}}
-          <div class="form-outline mb-4">
-            <input type="password" id="form1Example23" class="form-control form-control-lg set--width__input" placeholder="Password" name="password"/>
-            <label class="form-label" for="form1Example23"></label>
-          </div>
-          {{/if}}
+          
           
 
           
@@ -73,3 +51,5 @@
     </div>
   </div>
 </section>
+
+<script src="/js/checkLogin.js"></script>
