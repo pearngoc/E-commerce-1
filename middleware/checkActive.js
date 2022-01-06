@@ -3,16 +3,14 @@ const userService = require('../component/authentication/userService')
 module.exports = async (req, res, next) => {
     const {username, password} = req.body;
     const user = await userModel.find({username: username}).lean();
-    if(user[0] && userService.validPassword(password, user[0])){
+    if(user[0] && await userService.validPassword(password, user[0])){
         if(user[0].status == "activated"){
             next();
         }else{
-            const message = "Your account is not active"
-            res.render('authentication/views/login', {message, username, password});
+            res.json({message: "Your account is not active"})
         }
     }else{
-        const error = "Username or password is not correct!"
-        res.render('authentication/views/login', {error, username, password});
+        res.json({message: "Username or password is not correct!"})
     }
     
 }

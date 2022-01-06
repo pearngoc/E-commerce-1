@@ -9,7 +9,7 @@ router.get('/orders/pagination', ordersController.getOrdersPage)
 router.get('/orders/details/:id', ordersController.showDetail)
 router.get('/change-password', profileController.showChangePassword)
 router.post('/check-out', ordersController.checkOut)
-router.put('/change-password/:id', profileController.changePassword)
-router.put('/:id', profileController.changeProfile)
+router.post('/change-password', profileController.changePassword)
+router.post('/updateProfile', profileController.changeProfile)
 
 module.exports = router

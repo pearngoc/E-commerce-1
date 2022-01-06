@@ -1,4 +1,6 @@
 
+
+
 const element = document.getElementById('formRegister')
 element.addEventListener('submit', (event) => {
   event.preventDefault()
@@ -36,3 +38,5 @@ element.addEventListener('submit', (event) => {
     }
   })
 })
+
+

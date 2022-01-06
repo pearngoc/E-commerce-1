@@ -27,50 +27,43 @@
         <div class='d-flex justify-content-between align-items-center mb-3'>
           <h4 class='text-right'>My Profile</h4>
         </div>
-        <form method='POST' action='/me/{{user.id}}?_method=PUT'>
-          {{#if message}}
-            <div
-              class='row mt-2 alert alert-warning alert-dismissible fade show'
-            >
-              {{message}}
-            </div>
-          {{/if}}
-          {{#if success}}
-            <div
-              class='row mt-2 alert alert-success alert-dismissible fade show'
-            >
-              {{success}}
-            </div>
-          {{/if}}
+        <div id = "profileFormError">
+
+        </div>
+        <form method='POST' id="formChangeProfile">
           <div class='row mt-2'>
             {{#if user}}
+              <input type='hidden' id="profileFormId" name ="id" value={{user.id}}>
               <div class='col-md-6 mt-3'><strong>Username</strong><input
                   type='text'
                   class='form-control'
                   placeholder='username name'
                   value='{{user.username}}'
                   name='username'
-                  id='username'
+                  id='profileFormUsername'
                 /></div>
               <div class='col-md-12 mt-3'><strong>Email</strong><input
                   type='text'
                   class='form-control'
                   placeholder='email'
                   value='{{user.email}}'
-                  name='email'
+                  id='profileFormEmail'
+                  name="email"
                 /></div>
               <div class='col-md-12 mt-3'><strong>Phone number</strong><input
                   type='text'
                   class='form-control'
                   placeholder='phone number'
                   value='{{user.phone}}'
-                  name='phoneNumber'
+                  id='profileFormPhone'
+                  name="phone"
                 /></div>
               <div class='col-md-12 mt-3'><strong>Address</strong><input
                   type='text'
                   class='form-control'
                   placeholder='address'
                   value='{{user.address}}'
+                  id='profileFormAddress'
                   name='address'
                 /></div>
             {{/if}}
@@ -87,3 +80,4 @@
 
   </div>
 </div>
+<script src="/js/checkProfile.js"></script>

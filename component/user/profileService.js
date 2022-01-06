@@ -12,5 +12,5 @@ exports.findById = async (id) => {
 }
 
 exports.updateUser = async (id, body) => {
-  return await userModel.update({ _id: id }, body)
+  return await userModel.updateOne({ _id: id }, {username: body.username, email: body.email, phoneNumber: body.phone, address: body.address})
 }

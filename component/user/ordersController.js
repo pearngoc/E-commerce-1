@@ -15,51 +15,44 @@ exports.checkOut = async (req, res) => {
   } = req.body
   cart = JSON.parse(cart)
 
-  if (!phoneNumber || !address) {
-    req.session.error = "Information can't empty"
-    res.redirect('/cart')
-  } else if (!paypal && (!card_number || !expiry_date || !cvc)) {
-    req.session.error2 = 'Information payment cannot empty!'
-    res.redirect('/cart')
+ 
+  if (!paypal && (!card_number || !expiry_date || !cvc)) {
+    res.json({message:   'Information payment cannot empty!'})
   } else if (card_number && expiry_date && cvc) {
     if (card_number.length != 16) {
-      req.session.error2 = 'Card number is not correctly!'
-      res.redirect('/cart')
-    } else if (expiry_date != 5) {
-      req.session.error2 = 'Expiry date is not correctly!'
-      res.redirect('/cart')
+      res.json({message:  'Card number is not correctly!'})
+    } else if (expiry_date.length  != 5) {
+      res.json({message:  'Expiry date is not correctly!'})
     } else if (cvc.length != 3) {
-      req.session.error2 = 'CVC/CVV is not correctly!'
-      res.redirect('/cart')
+      res.json({message:  'CVC/CVV is not correctly!'})
     }
+  }else{
+    let paymentType, detailPayment
+    if (paypal) {
+      paymentType = 'Paypal'
+      detailPayment = paypal
+    } else if (card_number) {
+      paymentType = 'Credit card'
+      detailPayment = card_number
+    }
+  
+    const order = new orderSchema({
+      customerId: req.user.id,
+      items: cart,
+      address: address,
+      phone: phoneNumber,
+      paymentType: paymentType,
+      detailPayment: detailPayment,
+    })
+    req.user.totalItem = 0
+    await order.save()
+    await cartSchema.findOneAndDelete({ _id: idCart })
+    
+    res.json({message: ''})
   }
 
-  let paymentType, detailPayment
-  if (paypal) {
-    paymentType = 'Paypal'
-    detailPayment = paypal
-  } else if (card_number) {
-    paymentType = 'Credit card'
-    detailPayment = card_number
-  }
+  
 
-  const order = new orderSchema({
-    customerId: req.user.id,
-    items: cart,
-    address: address,
-    phone: phoneNumber,
-    paymentType: paymentType,
-    detailPayment: detailPayment,
-  })
-  req.user.totalItem = 0
-  const result = await order.save()
-  await cartSchema.findOneAndDelete({ _id: idCart })
-
-  if (result) {
-    res.redirect('/me/orders')
-  } else {
-    res.redirect('/cart')
-  }
 }
 
 exports.showOrders = async (req, res) => {
