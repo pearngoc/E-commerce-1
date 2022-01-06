@@ -1,32 +1,32 @@
 module.exports = {
   generateQueryObject: (category, sortBy, sortPrice, q) => {
-    const queryObject = {};
+    const queryObject = {}
 
     if (category) {
-      queryObject.category = category;
+      queryObject.category = category
     }
 
     switch (sortBy) {
-      case "view":
-        break;
-      case "newness":
-        break;
-      case "priceAsc":
-        break;
-      case "priceDesc":
-        break;
+      case 'view':
+        break
+      case 'newness':
+        break
+      case 'priceAsc':
+        break
+      case 'priceDesc':
+        break
 
       default:
-        break;
+        break
     }
 
     switch (sortPrice) {
-      case "0":
+      case '0':
         queryObject.price = {
           $gt: 200,
-        };
-        break;
-      case "50":
+        }
+        break
+      case '50':
         queryObject.$and = [
           {
             price: {
@@ -38,9 +38,9 @@ module.exports = {
               $lte: 50,
             },
           },
-        ];
-        break;
-      case "100":
+        ]
+        break
+      case '100':
         queryObject.$and = [
           {
             price: {
@@ -52,9 +52,9 @@ module.exports = {
               $lte: 100,
             },
           },
-        ];
-        break;
-      case "150":
+        ]
+        break
+      case '150':
         queryObject.$and = [
           {
             price: {
@@ -66,9 +66,9 @@ module.exports = {
               $lte: 150,
             },
           },
-        ];
-        break;
-      case "200":
+        ]
+        break
+      case '200':
         queryObject.$and = [
           {
             price: {
@@ -80,10 +80,10 @@ module.exports = {
               $lte: 200,
             },
           },
-        ];
-        break;
+        ]
+        break
       default:
-        break;
+        break
     }
 
     if (q) {
@@ -103,9 +103,9 @@ module.exports = {
             $regex: q,
           },
         },
-      ];
+      ]
     }
 
-    return queryObject;
+    return queryObject
   },
-};
+}

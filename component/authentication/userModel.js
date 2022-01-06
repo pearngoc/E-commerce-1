@@ -1,69 +1,71 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
-const userSchema = new Schema({
+const userSchema = new Schema(
+  {
     email: {
-        type: String,
-        required: true,
-        //unique: true
+      type: String,
+      required: true,
+      //unique: true
     },
     password: {
-        type: String,
+      type: String,
     },
     username: {
-        type: String,
-        default: "",
-        require: true,
+      type: String,
+      default: '',
+      require: true,
     },
 
-    isAdmin:{
-        type: Boolean,
-        default: false,
+    isAdmin: {
+      type: Boolean,
+      default: false,
     },
 
     avatar: {
-        type: String,
-        default: "https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg",
+      type: String,
+      default:
+        'https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg',
     },
 
-    phoneNumber:{
-        type: String,
-        default: "",
-        min: 10,
-        max: 12
+    phoneNumber: {
+      type: String,
+      default: '',
+      min: 10,
+      max: 12,
     },
 
-    address:{
-        type: String,
-        default: ""
-    },
-    
-    lock_status:{
-        type: Boolean,
-        default: false
+    address: {
+      type: String,
+      default: '',
     },
 
-    authType:{
-        type: String,
-        enum: ['local', 'google'],
-        default: 'local'
+    lock_status: {
+      type: Boolean,
+      default: false,
     },
 
-    authGoogleID:{
-        type: String,
-        default: null,
-    }, 
-
-    activationString:{
-        type: String,
-        default: "",
-    }, 
-    
-    status:{
-        type: String,
+    authType: {
+      type: String,
+      enum: ['local', 'google'],
+      default: 'local',
     },
 
-},{timestamps: true})
+    authGoogleID: {
+      type: String,
+      default: null,
+    },
 
+    activationString: {
+      type: String,
+      default: '',
+    },
 
-module.exports = mongoose.model("User", userSchema)
+    status: {
+      type: String,
+    },
+  },
+  { timestamps: true }
+)
+
+module.exports = mongoose.model('User', userSchema)
