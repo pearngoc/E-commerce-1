@@ -5,7 +5,7 @@ const PAGE_SIZE = 8
 const pageUtils = require('../../utils/page')
 const PAGE = require('../../constants/page')
 
-class CourseController {
+class ProductController {
   async show(req, res) {
     let { page, category, sortBy, sortPrice, q } = req.query
     let products
@@ -81,4 +81,4 @@ class CourseController {
   }
 }
 
-module.exports = new CourseController()
+module.exports = new ProductController()

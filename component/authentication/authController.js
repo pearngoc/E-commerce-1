@@ -79,39 +79,24 @@ exports.activate = async (req, res, next) => {
 }
 
 exports.getEmail = async (req, res) => {
-  const email = req.query.email
+  const email = req.body.email
   const result = await userService.findByEmail(email)
   if (result) {
-    userService.sendActivateLinkToResetPassword(email)
-    return res.redirect('/')
+    await userService.sendActivateLinkToResetPassword(email)
+    res.json({message: ''})
   } else {
-    res.redirect('/')
+    res.json({message: 'Email is not exists!'})
   }
 }
 
-exports.resetPassword = (req, res) => {
-  res.render('authentication/views/reset-password', { email: req.query.email })
+exports.renderUIReset = (req, res) => {
+  res.render('authentication/views/forgotPasswordNoti')
 }
 
 exports.forgotPassword = (req, res) => {
   res.render('authentication/views/forgot-password')
 }
 
-exports.updatePassword = async (req, res) => {
-  const { email, password } = req.body
-  const result = await userService.updatePassword('', email, password)
-  if (result) {
-    const user = await userService.findByEmail(email)
-    req.login(user, function (err) {
-      if (err) {
-        return next(err)
-      }
-      return res.redirect('/')
-    })
-  } else {
-    return res.redirect('/')
-  }
-}
 
 exports.activateMessage = (req, res) => {
   res.render('authentication/views/activeAccount')

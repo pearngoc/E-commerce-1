@@ -78,14 +78,14 @@ exports.updatePassword = async (id, email, password) => {
 
 exports.sendActivateLinkToResetPassword = async (email) => {
   const user = await userModel.findOne({ email: email }).lean()
+  const password = randomString.generate().slice(0, 10);
   const sgMail = require('@sendgrid/mail')
   sgMail.setApiKey(process.env.SENDGRID_API_KEY)
   const msg = {
     to: email, // Change to your recipient
     from: process.env.EMAIL_SENDER, // Change to your verified sender
     subject: 'Reset password',
-    text: 'and easy to do anywhere, even with Node.js',
-    html: `<p>Please to reset your password by<a href="${process.env.DOMAIN}/reset-password/reset?email=${email}">Reset now</a></p>`,
+    html: `<p>Hello ${user.username},</p></br><p>Your new password is: ${password}</p></br><p>Please do not give the password to anyone. Once logged into the system, please change your password as you wish</p>`,
   }
   sgMail
     .send(msg)
@@ -95,4 +95,7 @@ exports.sendActivateLinkToResetPassword = async (email) => {
     .catch((error) => {
       console.error(error)
     })
+
+  const passwordHash = await bcrypt.hash(password, 10)
+  await userModel.findOneAndUpdate({email: email}, {$set: {password: passwordHash}})
 }
