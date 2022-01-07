@@ -34,4 +34,5 @@ router.get(
     res.redirect('/')
   }
 )
+router.get('/active-message', authController.activateMessage)
 module.exports = router

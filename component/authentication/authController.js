@@ -113,3 +113,6 @@ exports.updatePassword = async (req, res) => {
   }
 }
 
+exports.activateMessage = (req, res) => {
+  res.render('authentication/views/activeAccount')
+}
