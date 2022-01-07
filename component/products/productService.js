@@ -1,6 +1,6 @@
 const Product = require("./productModel");
 
-class Course {
+class Products {
   show(skip, page_size, queryObject = {}) {
     return Product.find(queryObject).skip(skip).limit(page_size).lean();
   }
@@ -15,6 +15,10 @@ class Course {
 
   getTop10ProductsBySold() {
     return Product.find({}).sort({ sold: "desc" }).limit(10).lean();
+  }
+
+  getTop12ProductsBySold() {
+    return Product.find({}).sort({ sold: "desc" }).limit(12).lean();
   }
 
   async getRelatedProducts(product) {
@@ -47,4 +51,4 @@ class Course {
   }
 }
 
-module.exports = new Course();
+module.exports = new Products();

@@ -4,7 +4,7 @@ const cartModel = require("../component/cart/cartModel");
 const productService = require("../component/products/productService");
 /* GET home page. */
 router.get("/", async function (req, res, next) {
-  let top10Products = await productService.getTop10ProductsBySold();
+  let top12Products = await productService.getTop12ProductsBySold();
   if (req.user) {
     const carts = await cartModel.findOne({ customerID: req.user.id });
 
@@ -24,7 +24,7 @@ router.get("/", async function (req, res, next) {
   }
 
   res.render("index", {
-    top10Products,
+    top12Products,
   });
 });
 
