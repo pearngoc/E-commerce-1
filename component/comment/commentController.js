@@ -11,7 +11,6 @@ class CourseController {
       perPage,
       productID
     )
-
     res.status(201).json(comments)
   }
   async postComment(req, res) {
@@ -22,6 +21,11 @@ class CourseController {
     } else {
       res.redirect('/login')
     }
+  }
+  async postCommentAnonymous(req, res) {
+    const { productID, name, content } = req.body
+    await commentService.commentAnonymous({ productID, name, content })
+    res.status(201).json(productID)
   }
 }
 
