@@ -202,13 +202,21 @@
                                         
                                         <div class="flex-w flex-t p-b-30">
                                             <div class="wrap-pic-fix size-109 bor0 of-hidden m-r-18 m-t-6">
-                                                <img src="{{userID.avatar}}" alt="AVATAR">
+                                                {{#if userID}}
+                                                    <img src="{{userID.avatar}}" alt="AVATAR">
+                                                {{else}}
+                                                    <img src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" alt="AVATAR">
+                                                {{/if}}
                                             </div>
 
                                             <div class="size-207">
                                                 <div class="flex-w flex-sb-m p-b-17">
                                                     <span class="mtext-107 cl2 p-r-20">
-                                                        {{userID.username}}
+                                                        {{#if userID}}
+                                                            {{userID.username}}
+                                                        {{else}}
+                                                            {{name}}
+                                                        {{/if}}
                                                     </span>
 
 
@@ -255,7 +263,13 @@
                                                     id="commentContent" name="commentContent"></input>
                                                
                                             </div>
-
+                                            {{#unless user}}
+                                            <div class="col-sm-6 p-b-5">
+                                                <label class="stext-102 cl3" for="name">Name</label>
+                                                <input class="size-111 bor8 stext-102 cl2 p-lr-20" id="nameComment" type="text" name="name">
+                                                <div class="col-md-4 control-label errorMessage text-danger" id="nameCommentError"></div>
+                                            </div>
+                                            {{/unless}}
 
                                         </div>
                                         <input type="text" value="{{product._id}}" style="display: none;" id = "producID"> 
@@ -341,4 +355,4 @@
         </div>
     </div>
 </section>
-<script src="/utils/handlePostComment.js"></script>
+<script src="/utils/handleComment.js"></script>
