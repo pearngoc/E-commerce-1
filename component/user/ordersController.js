@@ -1,6 +1,7 @@
 const orderSchema = require('./ordersSchema')
 const cartSchema = require('../cart/cartModel')
 const ordersService = require('./ordersService')
+const productSchema = require('../products/productModel')
 const PAGE_SIZE = 4
 exports.checkOut = async (req, res) => {
   let {
@@ -15,7 +16,10 @@ exports.checkOut = async (req, res) => {
   } = req.body
   cart = JSON.parse(cart)
 
- 
+  console.log(cart)
+  if(phoneNumber.length < 10 || phoneNumber.length > 11){
+    res.json({message1: 'Phone number is invalid'})
+  }
   if (!paypal && (!card_number || !expiry_date || !cvc)) {
     res.json({message:   'Information payment cannot empty!'})
   } else if (card_number && expiry_date && cvc) {
@@ -45,10 +49,17 @@ exports.checkOut = async (req, res) => {
       detailPayment: detailPayment,
     })
     req.user.totalItem = 0
-    await order.save()
+    cart.forEach(async (element) => {
+      const product = await productSchema.findOne({_id: element.productID});
+      const sold = product.sold + element.qty;
+      const inStock = product.inStock - element.qty;
+      await productSchema.findOneAndUpdate({_id: element.productID}, {$set: {sold: sold, inStock: inStock}})
+    });
+    const orders = await order.save()
+    console.log(orders._id.toString())
     await cartSchema.findOneAndDelete({ _id: idCart })
     
-    res.json({message: ''})
+    res.json({success: orders._id.toString()})
   }
 
   

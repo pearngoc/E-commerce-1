@@ -18,14 +18,22 @@ element4.addEventListener('submit', (event) => {
     data: JSON.stringify({cart, idCart, phoneNumber, address, paypal, card_number, expiry_date, cvc }),
     success: (rs) => {
         console.log(rs)
-        if(!rs.message){
-         location.href = `http://localhost:3000/me/orders`
-        }else{
+        if(rs.success){
+         location.href = `http://localhost:3000/me/orders/details/${rs.success}`
+        }else if(rs.message ){
           $('#formCartNotification').html(`
           <div class="flex-w flex-t p-t-10 p-b-5">
             <div class="alert alert-warning alert-dismissible fade show"><i class="fas fa-exclamation-triangle mr-2"></i>${rs.message}</div>
           </div>
           `)       
+        }else if(rs.message1){
+          $('#formCartInformation').html(`
+          <div class="flex-w flex-t p-t-10 p-b-5">
+            <div class="alert alert-warning alert-dismissible fade show"><i class="fas fa-exclamation-triangle mr-2"></i>${rs.message1}</div>
+          </div>
+          `)
+                        
+                        
         }
         
       

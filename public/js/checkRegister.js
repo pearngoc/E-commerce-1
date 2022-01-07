@@ -17,7 +17,8 @@ element.addEventListener('submit', (event) => {
     data: JSON.stringify({ username, email, password, repassword }),
     success: (rs) => {
       if(!rs){
-        location.href = `http://localhost:3000/login`
+          
+        location.href = `http://localhost:3000/active-message`
       }else{
         console.log(rs)
         rs.forEach(element => {
