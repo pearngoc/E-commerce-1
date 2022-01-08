@@ -12,7 +12,7 @@ element4.addEventListener('submit', (event) => {
   const cvc = document.getElementById('formCartCsc').value
 
   $.ajax({
-    url: '/me/check-out',
+    url: '/check-out',
     method: 'POST',
     contentType: 'application/json',
     data: JSON.stringify({
@@ -27,13 +27,10 @@ element4.addEventListener('submit', (event) => {
     }),
     success: (rs) => {
       console.log(rs)
-      if(!rs.message){
-        location.href = `http://localhost:3000/login`
-        alert('Please login before checkout!')
-      }
-      else if (rs.success) {
+      if (rs.success) {
         location.href = `http://localhost:3000/me/orders/details/${rs.success}`
-      } else if (rs.message) {
+      }
+      else if (rs.message) {
         $('#formCartNotification').html(`
           <div class="flex-w flex-t p-t-10 p-b-5">
             <div class="alert alert-warning alert-dismissible fade show"><i class="fas fa-exclamation-triangle mr-2"></i>${rs.message}</div>
@@ -46,6 +43,11 @@ element4.addEventListener('submit', (event) => {
           </div>
           `)
       }
+      else if(!rs.message2){
+        location.href = `http://localhost:3000/login`
+        alert('Please checkout before login')
+      }
+      
     },
   })
 })

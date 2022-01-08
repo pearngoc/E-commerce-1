@@ -22,6 +22,8 @@ const authRouter = require("./component/authentication");
 const loggedInUserGuard = require("./middleware/loggerInUserGuard");
 const profileUserRouter = require("./component/user");
 const commentRouter = require("./component/comment/index");
+const checkOutRouter = require("./component/checkout/index")
+
 // connect to DB
 db.connect();
 
@@ -82,7 +84,8 @@ app.use("/", authRouter);
 app.use("/contact", contactRouter);
 app.use("/about", aboutRouter);
 app.use("/products", productRouter);
-app.use("/me", loggedInUserGuard, profileUserRouter);
+app.use("/check-out", checkOutRouter)
+app.use("/me", loggedInUserGuard ,profileUserRouter);
 app.use("/blog", blogRouter);
 app.use("/cart", cartRouter);
 app.use("/comment", commentRouter);
