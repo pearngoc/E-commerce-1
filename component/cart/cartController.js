@@ -16,6 +16,20 @@ module.exports.addToCart = async (req, res) => {
   res.redirect('/products')
 }
 
+module.exports.addToCartHome = async (req, res) => {
+  var productId = req.params.id
+  if (req.user) {
+    req.user.totalItem += 1
+    await cartService.addItemToCart(req.user, productId)
+  } else {
+    const product = await productService.findOne({ _id: productId })
+    var cart = new Cart(req.session.cart ? req.session.cart : {})
+    cart.add(product, productId)
+    req.session.cart = cart
+  }
+  res.redirect('/')
+}
+
 module.exports.addToCartFromDetail = async (req, res) => {
   var productId = req.params.id
   if (req.user) {
