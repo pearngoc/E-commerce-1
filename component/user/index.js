@@ -8,7 +8,6 @@ router.get('/orders', ordersController.showOrders)
 router.get('/orders/pagination', ordersController.getOrdersPage)
 router.get('/orders/details/:id', ordersController.showDetail)
 router.get('/change-password', profileController.showChangePassword)
-router.post('/check-out', ordersController.checkOut)
 router.post('/change-password', profileController.changePassword)
 router.post('/updateProfile', profileController.changeProfile)
 

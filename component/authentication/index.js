@@ -1,10 +1,11 @@
 var express = require('express')
 const passport = require('../../passport')
 const checkActive = require('../../middleware/checkActive')
+const loggerOutUserGuard = require('../../middleware/loggerOutUserGuard')
 var router = express.Router()
 
 const authController = require('./authController')
-router.get('/login', authController.login)
+router.get('/login',loggerOutUserGuard, authController.login)
 router.post(
   '/login',
   checkActive,
@@ -15,12 +16,12 @@ router.post(
 )
 // failureFlash: true }))
 router.get('/logout', authController.logout)
-router.post('/register', authController.register)
-router.get('/register', authController.renderRegister)
-router.get('/register/activate', authController.activate)
+router.post('/register',loggerOutUserGuard, authController.register)
+router.get('/register',loggerOutUserGuard, authController.renderRegister)
+router.get('/register/activate',loggerOutUserGuard,  authController.activate)
 router.get('/reset-password', authController.renderUIReset)
 router.post('/reset-password', authController.getEmail)
-router.get('/forgot-password', authController.forgotPassword)
+router.get('/forgot-password',loggerOutUserGuard, authController.forgotPassword)
 router.get(
   '/google',
   passport.authenticate('google', { scope: ['profile', 'email'] })
@@ -33,5 +34,5 @@ router.get(
     res.redirect('/')
   }
 )
-router.get('/active-message', authController.activateMessage)
+router.get('/active-message',loggerOutUserGuard, authController.activateMessage)
 module.exports = router
