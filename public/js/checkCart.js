@@ -1,20 +1,20 @@
-const element4 = document.getElementById('formCart')
-element4.addEventListener('submit', (event) => {
-  event.preventDefault()
+const element4 = document.getElementById("formCart");
+element4.addEventListener("submit", (event) => {
+  event.preventDefault();
 
-  const cart = document.getElementById('formCarts').value
-  const idCart = document.getElementById('formCartId').value
-  const phoneNumber = document.getElementById('formCartPhone').value
-  const address = document.getElementById('formCartAddress').value
-  const paypal = document.getElementById('formCartPaypal').value
-  const card_number = document.getElementById('formCartNumber').value
-  const expiry_date = document.getElementById('formCartExpiry').value
-  const cvc = document.getElementById('formCartCsc').value
+  const cart = document.getElementById("formCarts").value;
+  const idCart = document.getElementById("formCartId").value;
+  const phoneNumber = document.getElementById("formCartPhone").value;
+  const address = document.getElementById("formCartAddress").value;
+  const paypal = document.getElementById("formCartPaypal").value;
+  const card_number = document.getElementById("formCartNumber").value;
+  const expiry_date = document.getElementById("formCartExpiry").value;
+  const cvc = document.getElementById("formCartCsc").value;
 
   $.ajax({
-    url: '/check-out',
-    method: 'POST',
-    contentType: 'application/json',
+    url: "/check-out",
+    method: "POST",
+    contentType: "application/json",
     data: JSON.stringify({
       cart,
       idCart,
@@ -26,28 +26,25 @@ element4.addEventListener('submit', (event) => {
       cvc,
     }),
     success: (rs) => {
-      console.log(rs)
+      console.log(rs);
       if (rs.success) {
-        location.href = `http://localhost:3000/me/orders/details/${rs.success}`
-      }
-      else if (rs.message) {
-        $('#formCartNotification').html(`
+        location.href = `https://e-commerce-ptudw.herokuapp.com/me/orders/details/${rs.success}`;
+      } else if (rs.message) {
+        $("#formCartNotification").html(`
           <div class="flex-w flex-t p-t-10 p-b-5">
             <div class="alert alert-warning alert-dismissible fade show"><i class="fas fa-exclamation-triangle mr-2"></i>${rs.message}</div>
           </div>
-          `)
+          `);
       } else if (rs.message1) {
-        $('#formCartInformation').html(`
+        $("#formCartInformation").html(`
           <div class="flex-w flex-t p-t-10 p-b-5">
             <div class="alert alert-warning alert-dismissible fade show"><i class="fas fa-exclamation-triangle mr-2"></i>${rs.message1}</div>
           </div>
-          `)
+          `);
+      } else if (!rs.message2) {
+        location.href = `https://e-commerce-ptudw.herokuapp.com/login`;
+        alert("Please checkout before login");
       }
-      else if(!rs.message2){
-        location.href = `http://localhost:3000/login`
-        alert('Please checkout before login')
-      }
-      
     },
-  })
-})
+  });
+});
