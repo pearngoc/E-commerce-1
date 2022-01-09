@@ -28,7 +28,7 @@
             {{#each this.items}}
               <tr>
                 <td colspan='2'>{{this.title}}</td>
-                <td>{{this.qty}}px</td>
+                <td>{{this.qty}}pc</td>
                 <td>${{this.price}}</td>
               </tr>
             {{/each}}
@@ -37,9 +37,9 @@
               <td colspan='2'><h5 class='text-muted'><strong
                   >Total</strong></h5></td>
               <td><h5 class='text-muted'><strong
-                  >{{this.totalItem}}px</strong></h5></td>
+                  >{{this.totalItem}}pc</strong></h5></td>
               <td><h5 class='text-muted'><strong
-                  >{{this.totalPrice}}px</strong></h5></td>
+                  >${{this.totalPrice}}</strong></h5></td>
             </tr>
 
           </tbody>
