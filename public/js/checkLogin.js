@@ -13,7 +13,7 @@ element5.addEventListener("submit", (event) => {
     success: (rs) => {
       console.log(rs);
       if (!rs.message) {
-        location.href = `https://e-commerce-ptudw.herokuapp.com/`;
+        location.href = `https://coza-store-official.herokuapp.com/`;
       } else {
         $("#formLoginNotification").html(`
           <div class="form-outline mb-4">

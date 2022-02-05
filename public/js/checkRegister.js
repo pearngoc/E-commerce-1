@@ -14,7 +14,7 @@ element.addEventListener("submit", (event) => {
     data: JSON.stringify({ username, email, password, repassword }),
     success: (rs) => {
       if (!rs) {
-        location.href = `https://e-commerce-ptudw.herokuapp.com/active-message`;
+        location.href = `https://coza-store-official.herokuapp.com/active-message`;
       } else {
         console.log(rs);
         rs.forEach((element) => {

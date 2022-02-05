@@ -12,7 +12,7 @@ element6.addEventListener("submit", (event) => {
     success: (rs) => {
       console.log(rs);
       if (!rs.message) {
-        location.href = `https://e-commerce-ptudw.herokuapp.com/reset-password`;
+        location.href = `https://coza-store-official.herokuapp.com/reset-password`;
       } else {
         $("#formResetPasswordEmailNotification").html(`
           <div class="form-outline mb-4">

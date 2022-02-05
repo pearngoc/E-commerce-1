@@ -28,7 +28,7 @@ element4.addEventListener("submit", (event) => {
     success: (rs) => {
       console.log(rs);
       if (rs.success) {
-        location.href = `https://e-commerce-ptudw.herokuapp.com/me/orders/details/${rs.success}`;
+        location.href = `https://coza-store-official.herokuapp.com/me/orders/details/${rs.success}`;
       } else if (rs.message) {
         $("#formCartNotification").html(`
           <div class="flex-w flex-t p-t-10 p-b-5">
@@ -42,7 +42,7 @@ element4.addEventListener("submit", (event) => {
           </div>
           `);
       } else if (!rs.message2) {
-        location.href = `https://e-commerce-ptudw.herokuapp.com/login`;
+        location.href = `https://coza-store-official.herokuapp.com/login`;
         alert("Please checkout before login");
       }
     },
